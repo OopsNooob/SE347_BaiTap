@@ -1,0 +1,149 @@
+body {
+  background: url(../images/nguyen-tac-trong-thiet-ke-do-hoa.jpg) left top repeat-x fixed,
+              url(../images/truong_day_thiet_ke_do_hoa.jpg) 20% bottom no-repeat fixed;
+  margin-top: 150px;
+  font: 12pt Arial, sans-serif;
+}
+
+.tieude {
+  color: #0DBB00;
+  text-align: center;
+  text-shadow: 1px 1px 2px #1A7300;
+}
+
+#myTable {
+  width: 50%;
+  border: 5px solid #0DBB00;
+  margin: 0px auto;
+}
+
+th, td {
+  border: 1px solid #0DBB00;
+  padding: 5px;
+  color: #000000;
+}
+
+.dongtieude {
+  background-color: #0DBB00;
+  text-align: center;
+}
+
+.dongle {
+  background-color: rgba(255, 250, 135, 0.5);
+  text-align: center;
+}
+
+.dongchan {
+  background-color: rgba(121, 255, 252, 0.5);
+  text-align: center;
+}
+
+.dongcuoi {
+  background-color: rgba(255, 149, 44, 0.5);
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 10pt;
+    margin-top: 80px;
+    background: url(../images/nguyen-tac-trong-thiet-ke-do-hoa.jpg) left top repeat-x fixed;
+    background-size: auto 80px;
+  }
+  
+  h1.tieude {
+    font-size: 1.5rem;
+    margin: 20px 10px;
+  }
+  
+  #myTable {
+    width: 90%;
+    font-size: 0.9rem;
+    border: 4px solid #0DBB00;
+  }
+  
+  th, td {
+    padding: 8px 5px;
+  }
+  
+  td[align="left"] {
+    font-size: 0.85rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 9pt;
+    margin-top: 60px;
+    background: url(../images/nguyen-tac-trong-thiet-ke-do-hoa.jpg) left top repeat-x fixed;
+    background-size: auto 60px;
+  }
+  
+  h1.tieude {
+    font-size: 1.2rem;
+    margin: 15px 5px;
+  }
+  
+  #myTable {
+    width: 98%;
+    font-size: 0.75rem;
+    border: 3px solid #0DBB00;
+  }
+  
+  th, td {
+    padding: 6px 3px;
+    font-size: 0.75rem;
+  }
+  
+  .dongtieude {
+    font-size: 0.8rem;
+  }
+  
+  td[align="left"] {
+    font-size: 0.7rem;
+    text-align: left;
+  }
+  
+  #myTable th:first-child,
+  #myTable td:first-child {
+    width: 10%;
+  }
+  
+  #myTable th:nth-child(2),
+  #myTable td:nth-child(2) {
+    width: 50%;
+  }
+  
+  #myTable th:nth-child(3),
+  #myTable td:nth-child(3),
+  #myTable th:last-child,
+  #myTable td:last-child {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  body {
+    margin-top: 50px;
+    background-size: auto 50px;
+  }
+  
+  h1.tieude {
+    font-size: 1rem;
+    margin: 10px 3px;
+  }
+  
+  #myTable {
+    width: 99%;
+    font-size: 0.7rem;
+  }
+  
+  th, td {
+    padding: 5px 2px;
+    font-size: 0.7rem;
+  }
+  
+  td[align="left"] {
+    font-size: 0.65rem;
+  }
+}

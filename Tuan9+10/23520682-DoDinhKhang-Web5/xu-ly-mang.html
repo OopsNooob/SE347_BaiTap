@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xử Lý Mảng</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai01.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .input-hint {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result {
+            margin-top: 30px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .array-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .array-display h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .array-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .array-item {
+            background: white;
+            color: #667eea;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 18px;
+            min-width: 50px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .result-value {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-detail {
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .error {
+            background: #ffe6e6;
+            border-left-color: #e74c3c;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .error h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .error p {
+            color: #c0392b;
+            font-size: 16px;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            color: #667eea;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .array-items {
+                gap: 5px;
+            }
+
+            .array-item {
+                padding: 8px 12px;
+                font-size: 16px;
+                min-width: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Xử Lý Mảng Số Nguyên</h1>
+        <p class="subtitle">Nhập mảng và thực hiện các thao tác</p>
+        
+        <form onsubmit="processArray(event)">
+            <div class="form-group">
+                <label for="arrayInput">Nhập các số nguyên (cách nhau bởi dấu cách, phấy hoặc xuống dòng):</label>
+                <textarea id="arrayInput" placeholder="Ví dụ: 5 -3 12 8 -1 15 3 -7 20 6" rows="4" required></textarea>
+                <div class="input-hint">💡 Có thể nhập: "5 -3 12" hoặc "5, -3, 12" hoặc mỗi số một dòng</div>
+            </div>
+            
+            <button type="submit">Xử Lý Mảng</button>
+        </form>
+
+        <div id="result"></div>
+
+        <div class="info-box">
+            <h4>📚 Các Thao Tác:</h4>
+            <p><strong>a. Tìm số dương nhỏ nhất:</strong> Tìm số nhỏ nhất trong các số dương của mảng</p>
+            <p><strong>b. Sắp xếp giảm dần:</strong> Sắp xếp mảng từ lớn đến nhỏ</p>
+            <p><strong>c. Đảo thứ tự mảng:</strong> Đảo ngược vị trí các phần tử</p>
+        </div>
+    </div>
+
+    <script>
+        // Tìm số dương nhỏ nhất trong mảng
+        function findMinPositive(arr) {
+            const positives = arr.filter(num => num > 0);
+            if (positives.length === 0) {
+                return null;
+            }
+            return Math.min(...positives);
+        }
+
+        // Sắp xếp mảng giảm dần
+        function sortDescending(arr) {
+            return [...arr].sort((a, b) => b - a);
+        }
+
+        // Đảo thứ tự mảng
+        function reverseArray(arr) {
+            return [...arr].reverse();
+        }
+
+        // Parse input thành mảng số
+        function parseArrayInput(input) {
+            // Tách theo dấu cách, phẩy, hoặc xuống dòng
+            const numbers = input
+                .split(/[\s,\n]+/)
+                .map(s => s.trim())
+                .filter(s => s !== '')
+                .map(s => parseInt(s));
+            
+            // Kiểm tra có số không hợp lệ không
+            if (numbers.some(isNaN)) {
+                return null;
+            }
+            
+            return numbers;
+        }
+
+        // Hiển thị mảng
+        function displayArray(arr, title) {
+            return `
+                <div class="array-display">
+                    <h3>${title}</h3>
+                    <div>Số phần tử: ${arr.length}</div>
+                    <div class="array-items">
+                        ${arr.map(num => `<div class="array-item">${num}</div>`).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Xử lý form
+        function processArray(event) {
+            event.preventDefault();
+            
+            const input = document.getElementById('arrayInput').value;
+            const resultDiv = document.getElementById('result');
+            
+            // Parse input
+            const arr = parseArrayInput(input);
+            
+            // Kiểm tra input hợp lệ
+            if (!arr) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h3>❌ Lỗi</h3>
+                        <p>Dữ liệu nhập không hợp lệ! Vui lòng nhập các số nguyên.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            if (arr.length === 0) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h3>❌ Lỗi</h3>
+                        <p>Mảng rỗng! Vui lòng nhập ít nhất một số.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Thực hiện các thao tác
+            const minPositive = findMinPositive(arr);
+            const sortedDesc = sortDescending(arr);
+            const reversed = reverseArray(arr);
+            
+            // Tính thống kê
+            const positiveCount = arr.filter(n => n > 0).length;
+            const negativeCount = arr.filter(n => n < 0).length;
+            const zeroCount = arr.filter(n => n === 0).length;
+            const sum = arr.reduce((a, b) => a + b, 0);
+            const avg = (sum / arr.length).toFixed(2);
+            const max = Math.max(...arr);
+            const min = Math.min(...arr);
+            
+            // Hiển thị kết quả
+            let html = '<div class="result">';
+            
+            // Mảng gốc
+            html += displayArray(arr, '🔵 Mảng Ban Đầu');
+            
+            // Thống kê
+            html += `
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-label">Số phần tử</div>
+                        <div class="stat-value">${arr.length}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Tổng</div>
+                        <div class="stat-value">${sum}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Trung bình</div>
+                        <div class="stat-value">${avg}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Lớn nhất</div>
+                        <div class="stat-value">${max}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Nhỏ nhất</div>
+                        <div class="stat-value">${min}</div>
+                    </div>
+                </div>
+            `;
+            
+            // a. Số dương nhỏ nhất
+            html += `
+                <div class="result-box">
+                    <h4>a. 🟢 Số Dương Nhỏ Nhất</h4>
+            `;
+            
+            if (minPositive === null) {
+                html += `
+                    <div class="result-value" style="color: #e74c3c;">
+                        Không có số dương trong mảng
+                    </div>
+                    <div class="result-detail">
+                        Mảng chỉ chứa các số âm và/hoặc số 0.
+                    </div>
+                `;
+            } else {
+                const positiveNums = arr.filter(n => n > 0);
+                html += `
+                    <div class="result-value" style="color: #27ae60;">
+                        ${minPositive}
+                    </div>
+                    <div class="result-detail">
+                        <p><strong>Các số dương trong mảng:</strong> ${positiveNums.join(', ')}</p>
+                        <p><strong>Tổng số dương:</strong> ${positiveCount} số</p>
+                        <p><strong>Số dương nhỏ nhất:</strong> ${minPositive}</p>
+                    </div>
+                `;
+            }
+            
+            html += `</div>`;
+            
+            // b. Sắp xếp giảm dần
+            html += `
+                <div class="result-box">
+                    <h4>b. 🔽 Sắp Xếp Giảm Dần</h4>
+                    ${displayArray(sortedDesc, 'Mảng Sau Sắp Xếp')}
+                    <div class="result-detail">
+                        <p><strong>Thuật toán:</strong> Sắp xếp từ lớn đến nhỏ</p>
+                        <p><strong>Kết quả:</strong> ${sortedDesc.join(' → ')}</p>
+                    </div>
+                </div>
+            `;
+            
+            // c. Đảo thứ tự
+            html += `
+                <div class="result-box">
+                    <h4>c. 🔄 Đảo Thứ Tự Mảng</h4>
+                    ${displayArray(reversed, 'Mảng Sau Đảo Ngược')}
+                    <div class="result-detail">
+                        <p><strong>So sánh:</strong></p>
+                        <p>Ban đầu: ${arr.join(' → ')}</p>
+                        <p>Đảo ngược: ${reversed.join(' → ')}</p>
+                    </div>
+                </div>
+            `;
+            
+            // Thông tin bổ sung
+            html += `
+                <div class="result-box" style="background: #e8f5e9; border-left-color: #4caf50;">
+                    <h4 style="color: #2e7d32;">📊 Phân Tích Mảng</h4>
+                    <div class="result-detail">
+                        <p><strong>Số dương:</strong> ${positiveCount} phần tử</p>
+                        <p><strong>Số âm:</strong> ${negativeCount} phần tử</p>
+                        <p><strong>Số 0:</strong> ${zeroCount} phần tử</p>
+                        <p><strong>Khoảng giá trị:</strong> [${min}, ${max}]</p>
+                        <p><strong>Độ chênh lệch:</strong> ${max - min}</p>
+                    </div>
+                </div>
+            `;
+            
+            html += '</div>';
+            
+            resultDiv.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

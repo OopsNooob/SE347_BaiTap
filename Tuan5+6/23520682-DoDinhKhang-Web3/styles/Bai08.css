@@ -1,0 +1,143 @@
+body {
+  background: url(../images/rose.png) 10% bottom no-repeat fixed,
+              url(../images/kim-tea-hee.png) left bottom no-repeat fixed,
+              url(../images/nen-hoa-hong.png) right bottom no-repeat fixed;
+  background-color: #8E0205;
+  background-size: 300px, 400px, auto;
+  font: 12pt/20pt Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #FDCFff;
+  margin-top: 50px;
+}
+
+.mytable {
+  width: 60%;
+  margin: 0 350px;
+  border: 1px #FDCFff solid;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 5px;
+}
+
+.bullet_vuong_do {
+  list-style: none;
+  color: #ff0000;
+  font-weight: bold;
+}
+
+#nd {
+  column-count: 2;
+  padding: 20px;
+}
+
+#break {
+  margin-top: 15px;
+  break-before: column;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  body {
+    margin-top: 30px;
+  }
+  
+  .mytable {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 10pt;
+    line-height: 18pt;
+    margin-top: 20px;
+    background: url(../images/rose.png) 10% bottom no-repeat fixed,
+                url(../images/nen-hoa-hong.png) right bottom no-repeat fixed;
+    background-color: #8E0205;
+    background-size: 150px, auto;
+  }
+  
+  .mytable {
+    width: 95%;
+    margin: 0 auto;
+  }
+  
+  .mytable tr {
+    display: block;
+  }
+  
+  .mytable td {
+    display: block;
+    width: 100% !important;
+    padding: 10px;
+  }
+  
+  .mytable td[rowspan] {
+    text-align: center;
+  }
+  
+  #nd {
+    column-count: 1;
+    padding: 15px;
+  }
+  
+  #break {
+    break-before: auto;
+    margin-top: 10px;
+  }
+  
+  h2 {
+    font-size: 1.2em;
+  }
+  
+  h1 {
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 9pt;
+    line-height: 16pt;
+    margin-top: 10px;
+    background: url(../images/rose.png) 10% bottom no-repeat fixed,
+                url(../images/nen-hoa-hong.png) right bottom no-repeat fixed;
+    background-color: #8E0205;
+    background-size: 100px, auto;
+  }
+  
+  .mytable {
+    width: 98%;
+    margin: 0 auto;
+    border: none;
+  }
+  
+  .mytable td {
+    padding: 8px;
+  }
+  
+  #nd {
+    column-count: 1;
+    padding: 10px;
+  }
+  
+  #nd ul {
+    padding-left: 15px;
+  }
+  
+  h2 {
+    font-size: 1em;
+  }
+  
+  h1 {
+    font-size: 1.2em;
+  }
+}
+

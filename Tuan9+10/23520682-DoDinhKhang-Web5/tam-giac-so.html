@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tam Giác Số</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai01.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #fa709a;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #fa709a;
+            box-shadow: 0 0 0 3px rgba(250, 112, 154, 0.1);
+        }
+
+        button[type="submit"] {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(250, 112, 154, 0.4);
+        }
+
+        .result {
+            margin-top: 30px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .triangle-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .triangle-container h3 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .triangle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .triangle-row {
+            display: flex;
+            gap: 10px;
+            animation: slideInRow 0.5s ease-out;
+        }
+
+        @keyframes slideInRow {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .triangle-number {
+            background: white;
+            color: #667eea;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 18px;
+            min-width: 60px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .triangle-number:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .triangle-number.even {
+            background: #4caf50;
+            color: white;
+        }
+
+        .triangle-number.first-col {
+            background: #ff9800;
+            color: white;
+        }
+
+        .triangle-number.last-row {
+            background: #2196f3;
+            color: white;
+        }
+
+        .result-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #fa709a;
+        }
+
+        .result-box h4 {
+            color: #fa709a;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .result-value {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+
+        .result-detail {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        .error {
+            background: #ffe6e6;
+            border-left-color: #e74c3c;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .error h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .error p {
+            color: #c0392b;
+            font-size: 16px;
+        }
+
+        .info-box {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .info-box h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #856404;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+
+        .legend {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            color: #fa709a;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .input-wrapper {
+                flex-direction: column;
+            }
+
+            .triangle-number {
+                padding: 10px 14px;
+                font-size: 16px;
+                min-width: 50px;
+            }
+
+            .legend {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔺 Tam Giác Số</h1>
+        <p class="subtitle">Vẽ tam giác số tăng dần và tính toán</p>
+        
+        <form onsubmit="generateTriangle(event)">
+            <div class="form-group">
+                <label for="height">Nhập chiều cao n (0 < n < 10):</label>
+                <div class="input-wrapper">
+                    <input type="number" id="height" min="1" max="9" placeholder="Ví dụ: 4" required>
+                    <button type="submit">Vẽ Tam Giác</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="result"></div>
+
+        <div class="info-box">
+            <h4>📚 Giải Thích:</h4>
+            <p><strong>Tam giác số:</strong> Mỗi dòng có số phần tử bằng số thứ tự dòng đó</p>
+            <p><strong>a. Số chẵn:</strong> Tổng các số chia hết cho 2 (2, 4, 6, 8, ...)</p>
+            <p><strong>b. Cột đầu tiên:</strong> Số đầu tiên của mỗi dòng</p>
+            <p><strong>c. Dòng cuối cùng:</strong> Tất cả số ở dòng cuối</p>
+        </div>
+    </div>
+
+    <script>
+        // Tạo tam giác số
+        function createTriangle(n) {
+            const triangle = [];
+            let currentNum = 1;
+            
+            for (let row = 1; row <= n; row++) {
+                const rowData = [];
+                for (let col = 0; col < row; col++) {
+                    rowData.push(currentNum);
+                    currentNum++;
+                }
+                triangle.push(rowData);
+            }
+            
+            return triangle;
+        }
+
+        // Tính tổng các số chẵn
+        function sumEvenNumbers(triangle) {
+            let sum = 0;
+            const evenNumbers = [];
+            
+            triangle.forEach(row => {
+                row.forEach(num => {
+                    if (num % 2 === 0) {
+                        sum += num;
+                        evenNumbers.push(num);
+                    }
+                });
+            });
+            
+            return { sum, evenNumbers };
+        }
+
+        // Tính tổng cột đầu tiên
+        function sumFirstColumn(triangle) {
+            let sum = 0;
+            const numbers = [];
+            
+            triangle.forEach(row => {
+                sum += row[0];
+                numbers.push(row[0]);
+            });
+            
+            return { sum, numbers };
+        }
+
+        // Tính tổng dòng cuối cùng
+        function sumLastRow(triangle) {
+            const lastRow = triangle[triangle.length - 1];
+            const sum = lastRow.reduce((a, b) => a + b, 0);
+            
+            return { sum, numbers: lastRow };
+        }
+
+        // Hiển thị tam giác
+        function displayTriangle(triangle) {
+            let html = '';
+            
+            triangle.forEach((row, rowIndex) => {
+                html += '<div class="triangle-row">';
+                row.forEach((num, colIndex) => {
+                    let classes = ['triangle-number'];
+                    
+                    // Đánh dấu số chẵn
+                    if (num % 2 === 0) {
+                        classes.push('even');
+                    }
+                    
+                    // Đánh dấu cột đầu tiên
+                    if (colIndex === 0) {
+                        classes.push('first-col');
+                    }
+                    
+                    // Đánh dấu dòng cuối
+                    if (rowIndex === triangle.length - 1) {
+                        classes.push('last-row');
+                    }
+                    
+                    html += `<div class="${classes.join(' ')}">${num}</div>`;
+                });
+                html += '</div>';
+            });
+            
+            return html;
+        }
+
+        // Xử lý form
+        function generateTriangle(event) {
+            event.preventDefault();
+            
+            const n = parseInt(document.getElementById('height').value);
+            const resultDiv = document.getElementById('result');
+            
+            // Kiểm tra đầu vào
+            if (n < 1 || n > 9) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h3>❌ Lỗi</h3>
+                        <p>Chiều cao n phải nằm trong khoảng 0 < n < 10!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Tạo tam giác
+            const triangle = createTriangle(n);
+            
+            // Tính toán
+            const evenResult = sumEvenNumbers(triangle);
+            const firstColResult = sumFirstColumn(triangle);
+            const lastRowResult = sumLastRow(triangle);
+            
+            // Tính thống kê
+            const totalNumbers = (n * (n + 1)) / 2;
+            const maxNumber = totalNumbers;
+            const oddNumbers = triangle.flat().filter(num => num % 2 !== 0);
+            
+            let html = '<div class="result">';
+            
+            // Hiển thị tam giác
+            html += `
+                <div class="triangle-container">
+                    <h3>🔺 Tam Giác Số (n = ${n})</h3>
+                    <div class="triangle">
+                        ${displayTriangle(triangle)}
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #4caf50;"></div>
+                            <span>Số chẵn</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ff9800;"></div>
+                            <span>Cột đầu</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #2196f3;"></div>
+                            <span>Dòng cuối</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Thống kê tổng quan
+            html += `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Tổng số phần tử</div>
+                        <div class="stat-value">${totalNumbers}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Số lớn nhất</div>
+                        <div class="stat-value">${maxNumber}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Số chẵn</div>
+                        <div class="stat-value">${evenResult.evenNumbers.length}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Số lẻ</div>
+                        <div class="stat-value">${oddNumbers.length}</div>
+                    </div>
+                </div>
+            `;
+            
+            // a. Tổng số chẵn
+            html += `
+                <div class="result-box">
+                    <h4>a. 🟢 Tổng Các Số Chẵn</h4>
+                    <div class="result-value">
+                        Tổng = ${evenResult.sum}
+                    </div>
+                    <div class="result-detail">
+                        <p><strong>Các số chẵn:</strong> ${evenResult.evenNumbers.join(', ')}</p>
+                        <p><strong>Số lượng:</strong> ${evenResult.evenNumbers.length} số</p>
+                        <p><strong>Tính toán:</strong> ${evenResult.evenNumbers.join(' + ')} = ${evenResult.sum}</p>
+                    </div>
+                </div>
+            `;
+            
+            // b. Tổng cột đầu tiên
+            html += `
+                <div class="result-box">
+                    <h4>b. 🟠 Tổng Cột Đầu Tiên</h4>
+                    <div class="result-value">
+                        Tổng = ${firstColResult.sum}
+                    </div>
+                    <div class="result-detail">
+                        <p><strong>Các số ở cột đầu:</strong> ${firstColResult.numbers.join(', ')}</p>
+                        <p><strong>Số lượng:</strong> ${firstColResult.numbers.length} số (bằng chiều cao n)</p>
+                        <p><strong>Tính toán:</strong> ${firstColResult.numbers.join(' + ')} = ${firstColResult.sum}</p>
+                        <p><strong>Quy luật:</strong> Cột đầu là: 1, 2, 4, 7, 11, 16, ... (số tam giác + 1)</p>
+                    </div>
+                </div>
+            `;
+            
+            // c. Tổng dòng cuối cùng
+            html += `
+                <div class="result-box">
+                    <h4>c. 🔵 Tổng Dòng Cuối Cùng</h4>
+                    <div class="result-value">
+                        Tổng = ${lastRowResult.sum}
+                    </div>
+                    <div class="result-detail">
+                        <p><strong>Các số ở dòng cuối:</strong> ${lastRowResult.numbers.join(', ')}</p>
+                        <p><strong>Số lượng:</strong> ${lastRowResult.numbers.length} số (bằng chiều cao n)</p>
+                        <p><strong>Tính toán:</strong> ${lastRowResult.numbers.join(' + ')} = ${lastRowResult.sum}</p>
+                        <p><strong>Phạm vi:</strong> Từ ${lastRowResult.numbers[0]} đến ${lastRowResult.numbers[lastRowResult.numbers.length - 1]}</p>
+                    </div>
+                </div>
+            `;
+            
+            // Tổng kết
+            const totalSum = triangle.flat().reduce((a, b) => a + b, 0);
+            html += `
+                <div class="result-box" style="background: #e3f2fd; border-left-color: #2196f3;">
+                    <h4 style="color: #1976d2;">📊 Tổng Kết</h4>
+                    <div class="result-detail">
+                        <p><strong>Tổng tất cả các số:</strong> ${totalSum}</p>
+                        <p><strong>Công thức tổng:</strong> 1 + 2 + 3 + ... + ${maxNumber} = ${totalSum}</p>
+                        <p><strong>Công thức:</strong> Tổng = n(n+1)/2 với n = ${maxNumber}</p>
+                        <p><strong>Kiểm tra:</strong> ${maxNumber}×${maxNumber + 1}/2 = ${maxNumber * (maxNumber + 1) / 2} ✓</p>
+                    </div>
+                </div>
+            `;
+            
+            html += '</div>';
+            
+            resultDiv.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

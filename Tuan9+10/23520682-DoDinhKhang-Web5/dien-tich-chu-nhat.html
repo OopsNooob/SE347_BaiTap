@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diện Tích Hình Chữ Nhật</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai01.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #fff3cd;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+            border: 3px solid #d4a574;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #8b4513;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #5a3e2b;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #8b6f47;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #8b4513;
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.2);
+        }
+
+        .result-input {
+            background: #ffcdd2 !important;
+            font-weight: 600;
+            color: #c62828;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #8b7355 0%, #5a4a3a 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #5a4a3a 0%, #3a2a1a 100%);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .info-section {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 4px solid #8b4513;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .info-section h3 {
+            color: #8b4513;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .formula {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1565c0;
+            border: 2px dashed #1565c0;
+        }
+
+        .calculation-steps {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .calculation-steps p {
+            margin: 8px 0;
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: #fff9c4;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #f57f17;
+        }
+
+        .rectangle-visual {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .rectangle-box {
+            border: 3px solid #8b4513;
+            display: inline-block;
+            padding: 20px;
+            margin: 10px 0;
+            position: relative;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            min-width: 200px;
+            min-height: 150px;
+            border-radius: 8px;
+        }
+
+        .dimension-label {
+            position: absolute;
+            font-weight: 600;
+            color: #8b4513;
+            font-size: 14px;
+            background: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid #8b4513;
+        }
+
+        .width-label {
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .height-label {
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #d4a574;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            color: #8b4513;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diện Tích Hình Chữ Nhật</h1>
+        
+        <form onsubmit="calculateArea(event)">
+            <div class="form-group">
+                <label for="length">Chiều dài:</label>
+                <input type="number" id="length" step="any" placeholder="Nhập chiều dài" required>
+            </div>
+
+            <div class="form-group">
+                <label for="width">Chiều rộng:</label>
+                <input type="number" id="width" step="any" placeholder="Nhập chiều rộng" required>
+            </div>
+
+            <div class="form-group">
+                <label for="area">Diện tích:</label>
+                <input type="text" id="area" class="result-input" placeholder="Kết quả sẽ hiển thị ở đây" readonly>
+            </div>
+
+            <button type="submit">Tính</button>
+        </form>
+
+        <div id="resultSection"></div>
+
+        <div class="info-section">
+            <h3>📐 Công Thức</h3>
+            <div class="formula">
+                Diện tích = Chiều dài × Chiều rộng
+            </div>
+            <div class="formula">
+                S = D × R
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateArea(event) {
+            event.preventDefault();
+
+            // Lấy giá trị đầu vào
+            const length = parseFloat(document.getElementById('length').value);
+            const width = parseFloat(document.getElementById('width').value);
+            const areaInput = document.getElementById('area');
+            const resultSection = document.getElementById('resultSection');
+
+            // Kiểm tra giá trị hợp lệ
+            if (length <= 0 || width <= 0) {
+                areaInput.value = '';
+                resultSection.innerHTML = `
+                    <div class="info-section" style="background: #ffebee; border-left-color: #e74c3c;">
+                        <h3 style="color: #e74c3c;">❌ Lỗi</h3>
+                        <p style="color: #c0392b;">Chiều dài và chiều rộng phải lớn hơn 0!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Tính diện tích
+            const area = length * width;
+
+            // Hiển thị kết quả trong ô input
+            areaInput.value = area.toFixed(2);
+
+            // Tính chu vi và các thông tin khác
+            const perimeter = 2 * (length + width);
+            const diagonal = Math.sqrt(length * length + width * width);
+
+            // Tạo hình chữ nhật trực quan với tỷ lệ
+            const maxSize = 200;
+            const ratio = Math.max(length, width) / maxSize;
+            const visualWidth = length / ratio;
+            const visualHeight = width / ratio;
+
+            // Hiển thị thông tin chi tiết
+            resultSection.innerHTML = `
+                <div class="info-section">
+                    <h3>✅ Kết Quả Tính Toán</h3>
+                    
+                    <div class="rectangle-visual">
+                        <h4 style="color: #8b4513; margin-bottom: 20px;">Hình Chữ Nhật</h4>
+                        <div style="position: relative; display: inline-block; margin: 40px;">
+                            <div class="rectangle-box" style="width: ${visualWidth}px; height: ${visualHeight}px;">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 600; color: #8b4513;">
+                                    S = ${area.toFixed(2)}
+                                </div>
+                            </div>
+                            <span class="dimension-label width-label">D = ${length}</span>
+                            <span class="dimension-label height-label">R = ${width}</span>
+                        </div>
+                    </div>
+
+                    <div class="calculation-steps">
+                        <p><strong>📝 Các bước tính:</strong></p>
+                        <p>1. Công thức: <span class="highlight">Diện tích = Chiều dài × Chiều rộng</span></p>
+                        <p>2. Thay số: <span class="highlight">S = ${length} × ${width}</span></p>
+                        <p>3. Kết quả: <span class="highlight">S = ${area.toFixed(2)}</span></p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Diện tích (S)</div>
+                            <div class="stat-value">${area.toFixed(2)}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Chu vi (P)</div>
+                            <div class="stat-value">${perimeter.toFixed(2)}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Chiều dài (D)</div>
+                            <div class="stat-value">${length}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Chiều rộng (R)</div>
+                            <div class="stat-value">${width}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Đường chéo</div>
+                            <div class="stat-value">${diagonal.toFixed(2)}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Tỷ lệ D:R</div>
+                            <div class="stat-value">${(length/width).toFixed(2)}</div>
+                        </div>
+                    </div>
+
+                    <div class="calculation-steps" style="margin-top: 20px; background: #e3f2fd;">
+                        <p style="color: #1565c0;"><strong>💡 Thông tin bổ sung:</strong></p>
+                        <p style="color: #555;">• Chu vi: P = 2 × (D + R) = 2 × (${length} + ${width}) = ${perimeter.toFixed(2)}</p>
+                        <p style="color: #555;">• Đường chéo: d = √(D² + R²) = √(${length}² + ${width}²) = ${diagonal.toFixed(2)}</p>
+                        <p style="color: #555;">• Đơn vị: Nếu D và R tính bằng cm thì S tính bằng cm²</p>
+                    </div>
+                </div>
+            `;
+
+            // Scroll to result
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>

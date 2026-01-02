@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Shop Hoa Tươi Hạnh Phúc</title>
+  <link rel="icon" type="image/x-icon" href=".\images\Bai05.ico">
+  <style>
+    @font-face {
+      font-family: 'WeddingFont';
+      src: url('./UTM Wedding K&T.ttf') format('truetype');
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('./images/nen-hoa-hong2.png') no-repeat right top;
+      background-size: 100%;
+    }
+
+    h1 {
+      font-family: 'WeddingFont', cursive;
+      font-size: 50px;
+      color: #FCFFFF;
+      margin: 20px 0;
+      text-shadow: 2px 2px 5px #FF6CC5, 2px 2px 10px #FF6CC5;
+    }
+
+    .container {
+      display: flex;
+      margin: 20px;
+    }
+
+    .left {
+      flex: 1;
+    }
+
+    .left img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .right {
+      flex: 2;
+      padding: 10px 30px;
+      font-size: 16px;
+    }
+
+    .section-title {
+      font-weight: bold;
+      background-color: #FF0099;
+      color: white;
+      padding: 2px 6px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 20px 20px;
+    }
+
+    ul li {
+      margin: 5px 0;
+      padding-left: 20px;
+      background-repeat: no-repeat;
+      background-position: left center;
+    }
+
+    .gioi-thieu li {
+      background-image: url('./images/bullet-hoa-tim.png');
+    }
+
+    .lien-he li {
+      background-image: url('./images/bullet-tron-hong.png');
+    }
+
+    .lien-he li strong {
+      font-weight: bold;
+    }
+
+  p.footer {
+  text-align: justify;
+  line-height: 1.6;
+  font-size: 13px;  
+  color: black; 
+  margin-top: 20px;
+  margin-left: 0;
+  font-style: italic;
+}
+
+.footer-span {
+  color: #993399;
+  font-style: italic;
+}
+    hr{
+        border: none;
+        border-top: 2px solid #9A9A9A;
+        margin: 15px 400px 15px 0px;
+    }
+
+    .diachi{
+        font-weight: bold;
+        font-size: 17px;
+    }
+  </style>
+</head>
+<body>
+
+<marquee behavior="alternate" direction="left" scrollamount="5" width="100%" onmouseover="this.stop();" onmouseout="this.start();">
+  <h1>Shop Hoa Tươi Hạnh Phúc</h1>
+</marquee>
+
+  <div class="container">
+
+    <div class="left">
+    </div>
+
+    <div class="right">
+        <p class=".pnumbering">1.
+      <span class="section-title"> Giới thiệu</span></p>
+      <ul class="gioi-thieu">
+        <li>Thành lập ngày 01/07/2014</li>
+        <li>Chuyên cung cấp các loại hoa tươi</li>
+        <li>Có trên 20 cửa hàng bán lẻ tại TP.HCM</li>
+        <li>Nhận kết giỏ hoa theo yêu cầu của khách hàng</li>
+      </ul>
+<hr>
+      <p>2.
+      <span class="section-title"> Liên hệ</span></p>
+      <ul class="lien-he">
+        <li>Địa chỉ: <span class="diachi">245 Nguyễn Văn Cừ Q5, TP.HCM</span></li>
+        <li>Điện thoại: (08)39040272</li>
+        <li>Fax: (08)62619416 (Ext. 115)</li>
+      </ul>
+
+      <p class="footer">© Copyright:
+      <span class="footer-span">
+         Công Ty Tin Học
+      </span>
+    </p>
+    </div>
+  </div>
+</body>
+</html>

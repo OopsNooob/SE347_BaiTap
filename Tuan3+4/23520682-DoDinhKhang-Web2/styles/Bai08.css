@@ -1,0 +1,42 @@
+body {
+  background: url(../images/rose.png) 10% bottom no-repeat fixed,
+              url(../images/faker.png) left bottom no-repeat fixed,
+              url(../images/nen-hoa-hong.png) right bottom no-repeat fixed;
+  background-color: #1088e4;
+  background-size: 300px, 400px, auto;
+  font: 12pt/20pt Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #FDCFff;
+  margin-top: 50px;
+}
+
+.mytable {
+  width: 60%;
+  margin: 0 350px;
+  border: 1px #FDCFff solid;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 5px;
+}
+
+.bullet_vuong_do {
+  list-style: none;
+  color: #0026ff;
+  font-weight: bold;
+}
+
+#nd {
+  column-count: 2;
+  padding: 20px;
+}
+
+#break {
+  margin-top: 15px;
+  break-before: column;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

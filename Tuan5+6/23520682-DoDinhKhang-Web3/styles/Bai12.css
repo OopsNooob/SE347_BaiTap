@@ -1,0 +1,194 @@
+body{
+    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+    color: #0062D1;
+    font-weight: bold;
+    margin: 20px auto;
+    background-color: #0062D1;
+}
+
+.tieude{
+    text-shadow: 1px 1px 2px #045798, -2px -2px 4px #0065F7;
+    color: white;
+    text-align: center;
+}
+
+.txt{
+    background-color: rgba(0,131,246,0.2);
+    padding: 5px;
+    border: 1px, dotted #0268DA;
+    border-radius: 10px;
+}
+
+.btn{
+    background-image: linear-gradient(#0268DA, #4DA0FD);
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 5px;
+    border: 2px solid #1BE2FF;
+    width: 100px;
+}
+
+.mytable{
+    width: 50%;
+    box-shadow: 10px 10px 30px #33CCFF, -2px -2px 2px #33CCFF;
+    background: white url("../images/lazyfeel.png") center bottom no-repeat;
+    border-radius: 20px;
+    background-size: cover;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 14px;
+        margin: 15px auto;
+    }
+    
+    h1.tieude {
+        font-size: 1.5rem;
+        margin: 10px 0;
+    }
+    
+    .mytable {
+        width: 85%;
+        background-size: 200px;
+    }
+    
+    table tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+    
+    table td {
+        display: block;
+        width: 100% !important;
+        padding: 5px !important;
+        text-align: center !important;
+    }
+    
+    table td[align="right"] {
+        text-align: center !important;
+        font-weight: bold;
+        padding-bottom: 3px !important;
+    }
+    
+    .txt {
+        font-size: 0.9rem;
+        padding: 8px;
+        width: 90%;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    select.txt[multiple] {
+        height: auto;
+        min-height: 80px;
+    }
+    
+    input[type="number"].txt {
+        width: 70%;
+    }
+    
+    .btn {
+        width: 100px;
+        font-size: 0.9rem;
+        margin: 5px;
+    }
+    
+    label {
+        display: inline-block;
+        margin-right: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 12px;
+        margin: 10px 5px;
+        padding: 5px;
+    }
+    
+    h1.tieude {
+        font-size: 1.3rem;
+        margin: 10px 0;
+    }
+    
+    .mytable {
+        width: 95%;
+        background-size: 180px;
+        padding: 15px 10px;
+    }
+    
+    table tr {
+        display: block;
+        margin-bottom: 12px;
+    }
+    
+    table td {
+        display: block;
+        width: 100% !important;
+        padding: 5px !important;
+        text-align: center !important;
+    }
+    
+    table td[align="right"] {
+        text-align: center !important;
+        font-weight: bold;
+        padding-bottom: 5px !important;
+    }
+    
+    .txt {
+        font-size: 0.9rem;
+        padding: 8px;
+        width: 95%;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    select.txt[multiple] {
+        height: auto;
+        min-height: 100px;
+    }
+    
+    input[type="number"].txt {
+        width: 60%;
+    }
+    
+    .btn {
+        width: 100px;
+        font-size: 0.95rem;
+        padding: 8px;
+        margin: 5px;
+    }
+    
+    label {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    
+    table tr:last-child td {
+        padding-top: 15px !important;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    h1.tieude {
+        font-size: 1.1rem;
+    }
+    
+    .mytable {
+        width: 98%;
+        background-size: 150px;
+        padding: 12px 8px;
+    }
+    
+    .txt {
+        font-size: 0.85rem;
+        padding: 6px;
+    }
+    
+    .btn {
+        width: 90px;
+        font-size: 0.85rem;
+        padding: 6px;
+    }
+}

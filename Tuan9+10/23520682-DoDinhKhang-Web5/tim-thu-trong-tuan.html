@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm Thứ Trong Tuần</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai01.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #d6d6d6;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 30px;
+            animation: slideIn 0.5s ease-out;
+            border: 3px solid #0052cc;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title-bar {
+            background: linear-gradient(180deg, #0078d7 0%, #004c99 100%);
+            padding: 8px 15px;
+            margin: -30px -30px 20px -30px;
+            border-radius: 7px 7px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+
+        .title-bar h1 {
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .window-icon {
+            width: 16px;
+            height: 16px;
+            background: white;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 5px;
+        }
+
+        .window-btn {
+            width: 24px;
+            height: 20px;
+            background: #0078d7;
+            border: 1px solid white;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .window-btn:hover {
+            background: #1084d8;
+        }
+
+        .window-btn.close {
+            background: #e81123;
+        }
+
+        .window-btn.close:hover {
+            background: #f1233a;
+        }
+
+        .input-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #7b7b7b;
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            color: #0066cc;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .date-inputs {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        select {
+            padding: 8px 30px 8px 12px;
+            border: 2px solid #7b7b7b;
+            border-radius: 4px;
+            background: white;
+            font-size: 16px;
+            cursor: pointer;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=UTF-8,<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="%23333" stroke-width="2" stroke-linecap="round"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            transition: all 0.2s;
+        }
+
+        select:hover {
+            border-color: #0078d7;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #0078d7;
+            box-shadow: 0 0 0 2px rgba(0, 120, 215, 0.2);
+        }
+
+        .separator {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .find-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 40px;
+            background: #f0f0f0;
+            border: 2px solid #999;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .find-btn:hover {
+            background: #e0e0e0;
+            border-color: #666;
+        }
+
+        .find-btn:active {
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .result-section {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #7b7b7b;
+            text-align: center;
+        }
+
+        .result-text {
+            color: #d32f2f;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        .info-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 2px solid #999;
+        }
+
+        .info-section h3 {
+            color: #0066cc;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .info-section p {
+            color: #555;
+            margin: 8px 0;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .info-section strong {
+            color: #333;
+        }
+
+        @media (max-width: 600px) {
+            .date-inputs {
+                flex-direction: column;
+            }
+
+            select {
+                width: 100%;
+            }
+
+            .separator {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title-bar">
+            <h1><span class="window-icon"></span> Tìm thứ trong tuần</h1>
+            <div class="window-controls">
+                <div class="window-btn">_</div>
+                <div class="window-btn">□</div>
+                <div class="window-btn close">✕</div>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <div class="input-label">Nhập Ngày/tháng/năm</div>
+            <div class="date-inputs">
+                <select id="daySelect">
+                    <!-- Sẽ được tạo bởi JavaScript -->
+                </select>
+                <span class="separator">/</span>
+                <select id="monthSelect">
+                    <!-- Sẽ được tạo bởi JavaScript -->
+                </select>
+                <span class="separator">/</span>
+                <select id="yearSelect">
+                    <!-- Sẽ được tạo bởi JavaScript -->
+                </select>
+            </div>
+        </div>
+
+        <button class="find-btn" onclick="findDayOfWeek()">Tìm thứ trong tuần</button>
+
+        <div class="result-section">
+            <div class="result-text" id="resultText">Chọn ngày và nhấn "Tìm thứ trong tuần"</div>
+        </div>
+
+        <div class="info-section">
+            <h3>📅 Hướng Dẫn</h3>
+            <p><strong>• Chọn ngày:</strong> Từ 1 đến 31</p>
+            <p><strong>• Chọn tháng:</strong> Từ 1 đến 12</p>
+            <p><strong>• Chọn năm:</strong> Từ 2015 đến 2035</p>
+            <p><strong>💡 Lưu ý:</strong> Chương trình sẽ tự động kiểm tra tính hợp lệ của ngày tháng</p>
+        </div>
+    </div>
+
+    <script>
+        // Mảng tên các thứ trong tuần
+        const daysOfWeek = [
+            'Chủ Nhật',
+            'Thứ Hai',
+            'Thứ Ba',
+            'Thứ Tư',
+            'Thứ Năm',
+            'Thứ Sáu',
+            'Thứ Bảy'
+        ];
+
+        // Khởi tạo ComboBox
+        function initComboBoxes() {
+            const daySelect = document.getElementById('daySelect');
+            const monthSelect = document.getElementById('monthSelect');
+            const yearSelect = document.getElementById('yearSelect');
+
+            // Tạo ComboBox ngày (1-31)
+            for (let i = 1; i <= 31; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                daySelect.appendChild(option);
+            }
+
+            // Tạo ComboBox tháng (1-12)
+            for (let i = 1; i <= 12; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                monthSelect.appendChild(option);
+            }
+
+            // Tạo ComboBox năm (2015-2035)
+            const startYear = 2015;
+            const endYear = 2035;
+            
+            for (let i = startYear; i <= endYear; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                yearSelect.appendChild(option);
+            }
+
+            // Set giá trị mặc định (15/4/2025 - năm hiện tại gần nhất)
+            daySelect.value = 15;
+            monthSelect.value = 4;
+            yearSelect.value = 2025;
+        }
+
+        // Kiểm tra ngày hợp lệ
+        function isValidDate(day, month, year) {
+            // Kiểm tra tháng
+            if (month < 1 || month > 12) {
+                return false;
+            }
+
+            // Số ngày trong mỗi tháng
+            const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+            // Kiểm tra năm nhuận
+            if (isLeapYear(year)) {
+                daysInMonth[1] = 29;
+            }
+
+            // Kiểm tra ngày
+            if (day < 1 || day > daysInMonth[month - 1]) {
+                return false;
+            }
+
+            return true;
+        }
+
+        // Kiểm tra năm nhuận
+        function isLeapYear(year) {
+            return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        }
+
+        // Tìm thứ trong tuần
+        function findDayOfWeek() {
+            const day = parseInt(document.getElementById('daySelect').value);
+            const month = parseInt(document.getElementById('monthSelect').value);
+            const year = parseInt(document.getElementById('yearSelect').value);
+
+            // Kiểm tra tính hợp lệ
+            if (!isValidDate(day, month, year)) {
+                alert('Ngày tháng năm không hợp lệ!\nVui lòng kiểm tra lại.');
+                document.getElementById('resultText').textContent = 'Ngày không hợp lệ!';
+                return;
+            }
+
+            // Tạo đối tượng Date (tháng trong JavaScript bắt đầu từ 0)
+            const date = new Date(year, month - 1, day);
+
+            // Lấy thứ trong tuần (0 = Chủ Nhật, 1 = Thứ Hai, ...)
+            const dayOfWeek = date.getDay();
+
+            // Tạo tên thứ
+            const dayName = daysOfWeek[dayOfWeek];
+
+            // Hiển thị kết quả
+            const resultText = `Ngày ${day} tháng ${month} năm ${year} là ngày ${dayName}`;
+            document.getElementById('resultText').textContent = resultText;
+        }
+
+        // Cho phép nhấn Enter để tìm
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                findDayOfWeek();
+            }
+        });
+
+        // Khởi tạo khi load trang
+        window.onload = function() {
+            initComboBoxes();
+            findDayOfWeek(); // Tự động tìm với giá trị mặc định
+        };
+    </script>
+</body>
+</html>

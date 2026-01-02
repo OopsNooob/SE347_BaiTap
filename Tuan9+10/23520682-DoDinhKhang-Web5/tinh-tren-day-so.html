@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Toán Trên Dãy Số</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai01.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffe0b2;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #bf360c;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        label {
+            color: #4a148c;
+            font-weight: 600;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            border: 2px solid #5d4037;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 120px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #bf360c;
+            box-shadow: 0 0 0 3px rgba(191, 54, 12, 0.2);
+        }
+
+        .result-section {
+            margin-top: 30px;
+        }
+
+        .result-section h3 {
+            color: #bf360c;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .result-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .result-label {
+            color: #4a148c;
+            font-weight: 600;
+            font-size: 16px;
+            min-width: 180px;
+        }
+
+        .result-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #5d4037;
+            border-radius: 5px;
+            font-size: 18px;
+            background: #ffccbc !important;
+            font-weight: 700;
+            color: #bf360c;
+            min-width: 200px;
+        }
+
+        button {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 50px;
+            background: #ffb74d;
+            color: #000;
+            border: 2px solid #f57c00;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: #ffa726;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .info-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 5px solid #bf360c;
+        }
+
+        .info-section h3 {
+            color: #bf360c;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .sequence-display {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1565c0;
+            border: 2px dashed #1976d2;
+        }
+
+        .calculation-steps {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .calculation-steps p {
+            margin: 8px 0;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ffb74d;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            color: #bf360c;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .input-section {
+                flex-direction: column;
+            }
+
+            .result-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .result-label {
+                min-width: auto;
+            }
+
+            .result-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tính Toán Trên Dãy Số</h1>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <label>Giới hạn của dãy số:</label>
+            </div>
+            <div class="input-group">
+                <label>Số bắt đầu:</label>
+                <input type="number" id="startNum" value="1">
+            </div>
+            <div class="input-group">
+                <label>Số kết thúc:</label>
+                <input type="number" id="endNum" value="10">
+            </div>
+        </div>
+
+        <div class="result-section">
+            <h3>Kết quả:</h3>
+            
+            <div class="result-row">
+                <span class="result-label">Tổng các số:</span>
+                <input type="text" class="result-input" id="sumResult" readonly>
+            </div>
+
+            <div class="result-row">
+                <span class="result-label">Tích các số:</span>
+                <input type="text" class="result-input" id="productResult" readonly>
+            </div>
+
+            <div class="result-row">
+                <span class="result-label">Tổng các số chẵn:</span>
+                <input type="text" class="result-input" id="evenSumResult" readonly>
+            </div>
+
+            <div class="result-row">
+                <span class="result-label">Tổng các số lẻ:</span>
+                <input type="text" class="result-input" id="oddSumResult" readonly>
+            </div>
+        </div>
+
+        <button onclick="calculate()">Tính toán</button>
+
+        <div id="detailsSection"></div>
+
+        <div class="info-section">
+            <h3>📚 Hướng Dẫn</h3>
+            <div class="calculation-steps">
+                <p><strong>• Tổng các số:</strong> Cộng tất cả các số từ số bắt đầu đến số kết thúc</p>
+                <p><strong>• Tích các số:</strong> Nhân tất cả các số từ số bắt đầu đến số kết thúc</p>
+                <p><strong>• Tổng các số chẵn:</strong> Cộng các số chia hết cho 2</p>
+                <p><strong>• Tổng các số lẻ:</strong> Cộng các số không chia hết cho 2</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const start = parseInt(document.getElementById('startNum').value);
+            const end = parseInt(document.getElementById('endNum').value);
+
+            // Kiểm tra đầu vào
+            if (isNaN(start) || isNaN(end)) {
+                alert('Vui lòng nhập số hợp lệ!');
+                return;
+            }
+
+            if (start > end) {
+                alert('Số bắt đầu phải nhỏ hơn hoặc bằng số kết thúc!');
+                return;
+            }
+
+            if (end - start > 100) {
+                alert('Khoảng cách giữa hai số không được vượt quá 100!');
+                return;
+            }
+
+            // Khởi tạo biến
+            let sum = 0;
+            let product = 1;
+            let evenSum = 0;
+            let oddSum = 0;
+            let numbers = [];
+            let evenNumbers = [];
+            let oddNumbers = [];
+
+            // Tính toán
+            for (let i = start; i <= end; i++) {
+                numbers.push(i);
+                sum += i;
+                product *= i;
+
+                if (i % 2 === 0) {
+                    evenSum += i;
+                    evenNumbers.push(i);
+                } else {
+                    oddSum += i;
+                    oddNumbers.push(i);
+                }
+            }
+
+            // Hiển thị kết quả trong input
+            document.getElementById('sumResult').value = sum;
+            document.getElementById('productResult').value = product.toLocaleString();
+            document.getElementById('evenSumResult').value = evenSum;
+            document.getElementById('oddSumResult').value = oddSum;
+
+            // Hiển thị chi tiết
+            const detailsSection = document.getElementById('detailsSection');
+            detailsSection.innerHTML = `
+                <div class="info-section">
+                    <h3>📊 Chi Tiết Tính Toán</h3>
+                    
+                    <div class="sequence-display">
+                        <strong>Dãy số:</strong> ${numbers.join(', ')}
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Số phần tử</div>
+                            <div class="stat-value">${numbers.length}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Số chẵn</div>
+                            <div class="stat-value">${evenNumbers.length}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Số lẻ</div>
+                            <div class="stat-value">${oddNumbers.length}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Trung bình</div>
+                            <div class="stat-value">${(sum / numbers.length).toFixed(2)}</div>
+                        </div>
+                    </div>
+
+                    <div class="calculation-steps" style="margin-top: 20px;">
+                        <p><strong>1️⃣ Tổng các số:</strong></p>
+                        <p style="color: #1976d2; font-weight: 600;">${numbers.join(' + ')} = ${sum}</p>
+                        <p style="margin-top: 10px;"><em>Công thức: S = n(a + b)/2 = ${numbers.length}(${start} + ${end})/2 = ${sum}</em></p>
+                    </div>
+
+                    <div class="calculation-steps" style="margin-top: 15px;">
+                        <p><strong>2️⃣ Tích các số:</strong></p>
+                        <p style="color: #1976d2; font-weight: 600;">${numbers.join(' × ')} = ${product.toLocaleString()}</p>
+                        ${start === 1 ? `<p style="margin-top: 10px;"><em>Đây là giai thừa: ${end}! = ${product.toLocaleString()}</em></p>` : ''}
+                    </div>
+
+                    <div class="calculation-steps" style="margin-top: 15px;">
+                        <p><strong>3️⃣ Tổng các số chẵn:</strong></p>
+                        <p style="color: #4caf50; font-weight: 600;">
+                            ${evenNumbers.length > 0 ? evenNumbers.join(' + ') + ' = ' + evenSum : 'Không có số chẵn'}
+                        </p>
+                        <p style="margin-top: 5px;">Các số chẵn: ${evenNumbers.length} số</p>
+                    </div>
+
+                    <div class="calculation-steps" style="margin-top: 15px;">
+                        <p><strong>4️⃣ Tổng các số lẻ:</strong></p>
+                        <p style="color: #ff9800; font-weight: 600;">
+                            ${oddNumbers.length > 0 ? oddNumbers.join(' + ') + ' = ' + oddSum : 'Không có số lẻ'}
+                        </p>
+                        <p style="margin-top: 5px;">Các số lẻ: ${oddNumbers.length} số</p>
+                    </div>
+
+                    <div class="calculation-steps" style="margin-top: 15px; background: #e8f5e9;">
+                        <p style="color: #2e7d32;"><strong>✅ Kiểm tra:</strong></p>
+                        <p style="color: #555;">Tổng số chẵn + Tổng số lẻ = ${evenSum} + ${oddSum} = ${evenSum + oddSum}</p>
+                        <p style="color: #555;">Tổng tất cả các số = ${sum}</p>
+                        <p style="color: ${evenSum + oddSum === sum ? '#2e7d32' : '#c62828'}; font-weight: 600;">
+                            ${evenSum + oddSum === sum ? '✓ Kết quả chính xác!' : '✗ Có lỗi!'}
+                        </p>
+                    </div>
+                </div>
+            `;
+
+            // Scroll to details
+            detailsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Cho phép nhấn Enter để tính
+        document.getElementById('endNum').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                calculate();
+            }
+        });
+
+        // Tự động tính khi load trang
+        window.onload = function() {
+            calculate();
+        };
+    </script>
+</body>
+</html>

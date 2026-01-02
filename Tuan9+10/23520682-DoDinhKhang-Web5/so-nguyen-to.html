@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm Số Nguyên Tố</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai01.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button[type="submit"] {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin-top: 30px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .primes-container {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #667eea;
+        }
+
+        .primes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .primes-header h3 {
+            color: #667eea;
+            font-size: 1.5em;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 5px;
+            background: white;
+            padding: 5px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .view-btn {
+            padding: 8px 15px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .view-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .primes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 10px;
+        }
+
+        .prime-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            color: #667eea;
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .prime-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .primes-list {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            line-height: 2;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .error {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ffe6e6;
+            border-radius: 10px;
+            border-left: 5px solid #e74c3c;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .error h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .error p {
+            color: #c0392b;
+            font-size: 16px;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        @media (max-width: 600px) {
+            .input-wrapper {
+                flex-direction: column;
+            }
+
+            .primes-grid {
+                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔢 Tìm Số Nguyên Tố</h1>
+        <p class="subtitle">Liệt kê tất cả số nguyên tố từ 1 đến n</p>
+        
+        <form onsubmit="findPrimes(event)">
+            <div class="form-group">
+                <label for="number">Nhập số nguyên n (1 ≤ n ≤ 100,000):</label>
+                <div class="input-wrapper">
+                    <input type="number" id="number" min="1" max="100000" placeholder="Ví dụ: 100" required>
+                    <button type="submit">Tìm Kiếm</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="result"></div>
+
+        <div class="info-box">
+            <h4>📚 Thuật Toán Sàng Eratosthenes:</h4>
+            <p>Đây là thuật toán tối ưu để tìm tất cả số nguyên tố từ 1 đến n. Thuật toán hoạt động bằng cách loại bỏ tất cả các bội số của mỗi số nguyên tố.</p>
+            <p><strong>Độ phức tạp:</strong> O(n log log n) - rất hiệu quả cho n lớn.</p>
+        </div>
+    </div>
+
+    <script>
+        let currentView = 'grid'; // 'grid' hoặc 'list'
+
+        // Thuật toán Sàng Eratosthenes
+        function sieveOfEratosthenes(n) {
+            if (n < 2) return [];
+            
+            // Khởi tạo mảng đánh dấu
+            const isPrime = new Array(n + 1).fill(true);
+            isPrime[0] = isPrime[1] = false;
+            
+            // Sàng Eratosthenes
+            for (let i = 2; i * i <= n; i++) {
+                if (isPrime[i]) {
+                    for (let j = i * i; j <= n; j += i) {
+                        isPrime[j] = false;
+                    }
+                }
+            }
+            
+            // Lấy danh sách số nguyên tố
+            const primes = [];
+            for (let i = 2; i <= n; i++) {
+                if (isPrime[i]) {
+                    primes.push(i);
+                }
+            }
+            
+            return primes;
+        }
+
+        // Tính tổng các số nguyên tố
+        function sumPrimes(primes) {
+            return primes.reduce((sum, prime) => sum + prime, 0);
+        }
+
+        // Hiển thị số nguyên tố dạng lưới
+        function displayGridView(primes) {
+            return `
+                <div class="primes-grid">
+                    ${primes.map(prime => `<div class="prime-item">${prime}</div>`).join('')}
+                </div>
+            `;
+        }
+
+        // Hiển thị số nguyên tố dạng danh sách
+        function displayListView(primes) {
+            return `
+                <div class="primes-list">
+                    ${primes.join(', ')}
+                </div>
+            `;
+        }
+
+        // Chuyển đổi view
+        function toggleView(view) {
+            currentView = view;
+            const buttons = document.querySelectorAll('.view-btn');
+            buttons.forEach(btn => {
+                if (btn.dataset.view === view) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Lấy lại danh sách số nguyên tố từ DOM
+            const n = parseInt(document.getElementById('number').value);
+            if (n) {
+                const primes = sieveOfEratosthenes(n);
+                updatePrimesDisplay(primes);
+            }
+        }
+
+        // Cập nhật hiển thị
+        function updatePrimesDisplay(primes) {
+            const container = document.querySelector('.primes-container');
+            if (container) {
+                const content = currentView === 'grid' 
+                    ? displayGridView(primes) 
+                    : displayListView(primes);
+                
+                const displayDiv = container.querySelector('.primes-display');
+                displayDiv.innerHTML = content;
+            }
+        }
+
+        // Xử lý form
+        function findPrimes(event) {
+            event.preventDefault();
+            
+            const n = parseInt(document.getElementById('number').value);
+            const resultDiv = document.getElementById('result');
+            
+            // Kiểm tra đầu vào
+            if (n < 1) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h3>❌ Lỗi</h3>
+                        <p>Số n phải lớn hơn hoặc bằng 1!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            if (n > 100000) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h3>⚠️ Cảnh báo</h3>
+                        <p>Số n quá lớn! Vui lòng nhập số nhỏ hơn hoặc bằng 100,000 để tránh treo trình duyệt.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Hiển thị loading
+            resultDiv.innerHTML = '<div class="loading">Đang tìm kiếm số nguyên tố</div>';
+            
+            // Sử dụng setTimeout để không block UI
+            setTimeout(() => {
+                const startTime = performance.now();
+                const primes = sieveOfEratosthenes(n);
+                const endTime = performance.now();
+                const executionTime = (endTime - startTime).toFixed(2);
+                
+                if (primes.length === 0) {
+                    resultDiv.innerHTML = `
+                        <div class="error">
+                            <h3>📢 Thông Báo</h3>
+                            <p>Không có số nguyên tố nào từ 1 đến ${n}.</p>
+                            <p style="margin-top: 10px; font-size: 14px;">Số nguyên tố nhỏ nhất là 2.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const sum = sumPrimes(primes);
+                const avg = (sum / primes.length).toFixed(2);
+                
+                let html = '<div class="result">';
+                
+                // Thống kê
+                html += `
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value">${n}</div>
+                            <div class="stat-label">Phạm vi</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">${primes.length}</div>
+                            <div class="stat-label">Số nguyên tố</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">${sum}</div>
+                            <div class="stat-label">Tổng</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">${avg}</div>
+                            <div class="stat-label">Trung bình</div>
+                        </div>
+                    </div>
+                `;
+                
+                // Container hiển thị số nguyên tố
+                html += `
+                    <div class="primes-container">
+                        <div class="primes-header">
+                            <h3>📋 Danh Sách Số Nguyên Tố</h3>
+                            <div class="view-toggle">
+                                <button class="view-btn ${currentView === 'grid' ? 'active' : ''}" 
+                                        data-view="grid" 
+                                        onclick="toggleView('grid')">
+                                    🔲 Lưới
+                                </button>
+                                <button class="view-btn ${currentView === 'list' ? 'active' : ''}" 
+                                        data-view="list" 
+                                        onclick="toggleView('list')">
+                                    📝 Danh sách
+                                </button>
+                            </div>
+                        </div>
+                        <div class="primes-display">
+                `;
+                
+                html += currentView === 'grid' 
+                    ? displayGridView(primes) 
+                    : displayListView(primes);
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+                
+                // Thông tin chi tiết
+                html += `
+                    <div class="info-box">
+                        <h4>📊 Chi Tiết:</h4>
+                        <p><strong>Số nguyên tố đầu tiên:</strong> ${primes[0]}</p>
+                        <p><strong>Số nguyên tố cuối cùng:</strong> ${primes[primes.length - 1]}</p>
+                        <p><strong>Tỷ lệ:</strong> ${((primes.length / n) * 100).toFixed(2)}% các số từ 1-${n} là số nguyên tố</p>
+                        <p><strong>Thời gian thực thi:</strong> ${executionTime}ms</p>
+                    </div>
+                `;
+                
+                html += '</div>';
+                
+                resultDiv.innerHTML = html;
+            }, 100);
+        }
+    </script>
+</body>
+</html>

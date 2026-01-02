@@ -1,0 +1,292 @@
+/* CSS Document 
+    #4B2802: nâu đậm
+    #CCA45C: nâu vàng
+    #FEE8D1: nâu hồng menu
+    #BC7F10: nâu vàng background*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font:12px Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color:#4B2802;
+    background:#BC7F10 url(../images/coffee_seed.png) repeat-x fixed;
+}
+
+#container{
+    width:60%;
+    margin:0 auto;
+    background-color:#4B2802;
+    box-shadow:0px 0px 20px #4B2802;
+}
+
+header{
+    width:100%;
+    padding-top:20px;
+}
+
+main{
+    display:flex; /* Để canh chỉnh độ cao menu doc và content tự động bằng nhau */
+}
+
+#ver_menu{
+    width:25%;
+    padding:20px;
+    background-color:#FEE8D1;
+    float:left;
+}
+
+#ver_menu a{
+    display:block;
+    padding:10px;
+    color:#4B2802;
+    font-weight:bold;
+    text-decoration:none;
+    text-shadow:1px 1px 2px rgba(75,40,2,0.35);
+    font-size:14px;
+    border-bottom:1px dashed #4B2802;
+}
+
+#ver_menu a:hover{
+    color:#FFFFFF;
+    background:#CCA45C url(../images/coffee-seed.png) right no-repeat;
+    transition: 1s;
+}
+
+#ver_menu .active{
+    background-color:#CCA45C; /* Xác định trang hiện hành */
+}
+
+#content{
+    width:75%;
+    float:right;
+    background-color:#FFFFFF;
+    padding:20px;
+}
+
+#content img{
+    margin-right:20px;
+}
+
+#logo{
+    text-align:center;
+}
+
+#logo img{
+    max-width:100%;
+    height:auto;
+}
+
+footer{
+    width:100%;
+    clear:both;
+    padding:20px;
+    font-size:10px;
+    color:#CCA45C;
+}
+
+footer a{
+    color:#CCA45C;
+    text-decoration:none;
+}
+
+footer a:hover{
+    color:#BC7F10;
+    text-decoration:underline;
+}
+
+#links{
+    width:50%;
+    float:left;
+}
+
+#copyright{
+    width:50%;
+    float:right;
+    text-align:right;
+}
+
+#content_header{
+    width:100%;
+    padding:20px;
+    margin-bottom:20px;
+    font-size:16px;
+    font-weight:bold;
+    background-color:#CCA45C;
+    border-top:1px dashed #4B2802;
+    border-bottom:1px dashed #4B2802;
+    text-shadow:1px 1px 2px rgba(75,40,2,0.35);
+}
+
+#content h2{
+    margin:20px auto;
+}
+
+.img_100{
+    width:100%; /* Độ rộng của hình là 100% */
+    height:auto; /* Độ cao của hình tự động co giãn tỷ lệ cân đối với độ rộng hình */
+}
+
+.img_50{
+    width:50%;
+    height:auto;
+    margin:20px 0px;
+}
+
+.three-colums{
+    column-count:3; /* Chia nội dung thành 3 cột */
+    column-rule:dashed; /* Đường kẻ đứt nét giữa các cột */
+    column-gap:20px; /* Định khoảng cách giữa các cột */
+}
+
+.three-colums img{
+    width:100%;
+    height:100px;
+}
+
+.two-colums{
+    column-count:2;
+    column-gap:10px;
+}
+
+.items{
+    border: #4e2801 1px dashed;
+    margin:20px;
+    padding:10px;
+    box-shadow:5px 5px 5px rgba(78,40,1,0.35);
+}
+
+.items:hover {
+    box-shadow:10px 10px 10px rgba(78,40,1,0.75);
+    transition:1s; /* Định thời gian tạo hiệu ứng hover trên các item là 1s */
+    transform:scale(1.1); /* Định hiệu ứng kéo giãn lớn item thêm 10% */
+}
+
+.items img {
+    width:100%;
+    height:auto;
+}
+
+figcaption{
+    font-size:10px;
+    font-weight:bold;
+    background-color:#CCA45C;
+    padding:5px;
+    text-align:center;
+    break-inside:avoid; /* Tránh bị ngắt cột giữa hình ảnh và chú thích => chú thích sẽ nằm liền ngay dưới hình ảnh */
+}
+
+figcaption .name{
+    font-size:14px;
+}
+
+.colum-break{
+    break-before:column; /* Tạo ngắt cột => Nội dung sẽ bị ngắt, đẩy sang cột mới */
+}
+
+.buy{ /* Định dạng cho form Đặt mòn ở bên phải Slidewrapper của Trang Black Coffee */
+    width:30%;
+    float:right;
+    padding:100px 5px;
+}
+
+.txt{ /* Định dạng cho các điều khiển nhập liệu của form Contact */
+    border:1px dashed #4B2802;
+    color:#4B2802;
+    font-weight:bold;
+    padding:5px;
+}
+
+.but{ /* Định dạng cho các nút nhấn của form */
+    color:#CCA45C;
+    background-color: #4B2802;
+    font-weight:bold;
+    padding:5px;
+}
+
+/*Định dạng CSS cho điện thoại di động*/
+@media screen and (max-width: 600px) {
+    #container{
+        width:100%;
+    }
+    main{
+        display:block;
+    }
+    #cafe{
+        display:none;
+    }
+    #ver_menu, #content {
+        width:100%;
+        font-size:10px;
+        padding:5px;
+    }
+    #ver_menu a {
+        width:100%; /* Định độ rộng các mục menu là 100% */
+        float: none;
+        padding: 15px;
+        border-right:none; /* Bỏ border right */
+        border-bottom:1px dashed #4B2802; /* Tạo border bottom đứt nét */
+    }
+    footer{
+        padding:10px;
+        height:50px;
+    }
+    #links, #copyright{
+        width:100%;
+        text-align:center;
+    }
+    .img_50{
+        width:100%;
+    }
+    .three-colums{
+        column-count:auto; /* Định chia cột tự động */
+    }
+    .three-colums img{
+        max-width:100%; /* Độ rộng của hình có giãn tự động 100% kích thuóc div chứa, nhưng không vượt quá kích thuóc thật */
+        height:auto;
+    }
+    .two-colums{
+        column-count:auto; /* Định chia cột tự động */
+    }
+    .txt{
+        width:100%; /* Định độ rộng các điều khiển nhập liệu là 100% */
+    }
+}
+
+/*Định dạng CSS cho máy tính bảng*/
+@media screen and (max-width: 900px) {
+    #container{
+        width:80%; /* Định kích thuóc div #container là 80% */
+    }
+    main{
+        display:block; /* Định <main> dạng block khỏi, không còn dạng flex nữa */
+    }
+    #cafe{
+        display:none; /* Ẩn div #cafe chứa hình mình hoa phía dưới menu doc */
+    }
+    #ver_menu, #content {
+        width:100%; /* Định kích thuóc menu doc và content là 100% */
+        font-size:10px;
+        padding:5px;
+    }
+    #ver_menu a {
+        float: left; /* Định các mục menu nằm ngang cạnh nhau phía trên content, phía dưới slideshow banner */
+        padding: 15px;
+        border-bottom: none; /* Bỏ border bottom */
+        border-right:1px dashed #4B2802; /* Tạo border right đứt nét */
+    }
+    footer{
+        padding:10px;
+        height:50px;
+    }
+    #links, #copyright{
+        width:100%; /* Định kích thuóc các bottom links và copyright trong phần footer là 100% */
+        text-align:center; /* Canh giữa nội dung */
+    }
+    .img_50{
+        width:100%; /* Định độ rộng các hình dạng 50% thành 100% */
+    }
+}

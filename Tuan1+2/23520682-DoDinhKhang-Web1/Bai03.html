@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Định dạng văn bản</title>
+  <link rel="icon" type="image/x-icon" href=".\images\Bai03.ico">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Times New Roman", Arial, sans-serif;
+      background-color: white;
+      color: black;
+      line-height: 1.6;
+      padding: 40px 100px;
+       background: url("./images/walterwhite2.png") no-repeat center center fixed;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00CC00;
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+
+    p {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+
+    .subject {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .chemistry {
+      font-style: italic;
+    }
+
+    .chemistry .formula {
+      color: red;
+      font-style: normal;
+    }
+
+    .math {
+      font-style: italic;
+    }
+
+    .math .formula {
+      color: red;
+      font-style: normal;
+    }
+
+    .cs {
+      font-style: italic;
+    }
+
+    pre {
+      background-color: #d3d3d3;
+      padding: 15px;
+      font-family: "Courier New", monospace;
+      font-size: 16px;
+      color: blue;
+      padding: 15px 20px 15px 80px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Định dạng văn bản</h1>
+
+  <p>
+    <span class="subject">Hóa học:</span>
+    <span class="chemistry">
+      Nước: <span class="formula">H<sub>2</sub>O</span> ;
+      Axit Sunfuric: <span class="formula">H<sub>2</sub>SO<sub>4</sub></span>
+    </span>
+  </p>
+
+  <p>
+    <span class="subject">Toán học:</span>
+    <span class="math">
+      Phương trình bậc 2:
+      <span class="formula">ax<sup>2</sup> + bx + c = 0</span>
+    </span>
+  </p>
+
+  <p>
+    <span class="subject">Tin học:</span>
+    <span class="cs">Vòng lặp for:</span>
+  </p>
+
+  <pre>
+int tong = 0;
+
+for(int i = 1; i <= 10; i++)
+    
+  tong += i;
+
+printf("Tong cac so tu 1 => 10 la: %d\n", tong);
+  </pre>
+
+</body>
+</html>

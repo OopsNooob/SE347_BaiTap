@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Tổng Lũy Thừa</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai01.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #fa709a;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .formula {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .formula-text {
+            font-size: 1.3em;
+            color: #856404;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+        }
+
+        .formula-note {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #fa709a;
+            box-shadow: 0 0 0 3px rgba(250, 112, 154, 0.1);
+        }
+
+        button[type="submit"] {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(250, 112, 154, 0.4);
+        }
+
+        .result {
+            margin-top: 30px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .result-box h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .result-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            word-break: break-all;
+        }
+
+        .steps-container {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #fa709a;
+        }
+
+        .steps-container h3 {
+            color: #fa709a;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .step-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .step-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-label {
+            color: #666;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .step-value {
+            font-weight: bold;
+            color: #fa709a;
+            font-size: 18px;
+        }
+
+        .step-running {
+            color: #999;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .summary {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .summary h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .summary p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 5px 0;
+        }
+
+        .error {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ffe6e6;
+            border-radius: 10px;
+            border-left: 5px solid #e74c3c;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .error h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .error p {
+            color: #c0392b;
+            font-size: 16px;
+        }
+
+        .info-box {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #4caf50;
+        }
+
+        .info-box h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .info-box ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .info-box li {
+            color: #555;
+            margin: 5px 0;
+        }
+
+        sup {
+            font-size: 0.7em;
+        }
+
+        @media (max-width: 600px) {
+            .input-wrapper {
+                flex-direction: column;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .result-value {
+                font-size: 1.8em;
+            }
+
+            .formula-text {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧮 Tính Tổng Lũy Thừa</h1>
+        <p class="subtitle">Tính tổng S với công thức lũy thừa luân phiên</p>
+        
+        <div class="formula">
+            <div class="formula-text">
+                S = -1 + 1¹ - 2² + 3³ - 4⁴ + ... + (-1)<sup>n+1</sup> × n<sup>n</sup>
+            </div>
+            <div class="formula-note">
+                Dấu luân phiên: +, -, +, -, ... theo quy luật (-1)<sup>k+1</sup>
+            </div>
+        </div>
+        
+        <form onsubmit="calculateSum(event)">
+            <div class="form-group">
+                <label for="number">Nhập số nguyên n (1 ≤ n ≤ 20):</label>
+                <div class="input-wrapper">
+                    <input type="number" id="number" min="1" max="20" placeholder="Ví dụ: 5" required>
+                    <button type="submit">Tính Toán</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="result"></div>
+
+        <div class="info-box">
+            <h4>📚 Giải Thích Công Thức:</h4>
+            <p><strong>S = -1 + 1¹ - 2² + 3³ - 4⁴ + ... + (-1)<sup>n+1</sup> × n<sup>n</sup></strong></p>
+            <ul>
+                <li><strong>Số hạng thứ k:</strong> (-1)<sup>k+1</sup> × k<sup>k</sup></li>
+                <li><strong>Dấu:</strong> Luân phiên + và - bắt đầu với +</li>
+                <li><strong>Lũy thừa:</strong> k<sup>k</sup> (k mũ k)</li>
+                <li><strong>Giới hạn:</strong> n ≤ 20 (do n<sup>n</sup> tăng rất nhanh)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Tính lũy thừa k^k
+        function power(k) {
+            if (k === 0) return 1;
+            let result = 1;
+            for (let i = 0; i < k; i++) {
+                result *= k;
+            }
+            return result;
+        }
+
+        // Tính tổng S
+        function calculateS(n) {
+            let sum = -1; // Bắt đầu với -1
+            let steps = [{ 
+                term: 0, 
+                value: -1, 
+                sign: '', 
+                calculation: 'Giá trị khởi đầu: -1', 
+                runningSum: -1,
+                powerValue: null
+            }];
+            
+            for (let k = 1; k <= n; k++) {
+                const powerValue = power(k);
+                const sign = Math.pow(-1, k + 1);
+                const term = sign * powerValue;
+                sum += term;
+                
+                const signStr = sign > 0 ? '+' : '-';
+                
+                steps.push({
+                    term: k,
+                    value: term,
+                    sign: signStr,
+                    calculation: `${signStr} ${k}^${k} = ${signStr} ${powerValue}`,
+                    runningSum: sum,
+                    powerValue: powerValue
+                });
+            }
+            
+            return { sum, steps };
+        }
+
+        // Format số lớn
+        function formatNumber(num) {
+            if (Math.abs(num) < 1e15) {
+                return num.toLocaleString('vi-VN');
+            }
+            return num.toExponential(2);
+        }
+
+        // Xử lý form
+        function calculateSum(event) {
+            event.preventDefault();
+            
+            const n = parseInt(document.getElementById('number').value);
+            const resultDiv = document.getElementById('result');
+            
+            // Kiểm tra đầu vào
+            if (n < 1) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h3>❌ Lỗi</h3>
+                        <p>Số n phải lớn hơn hoặc bằng 1!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            if (n > 20) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h3>⚠️ Cảnh báo</h3>
+                        <p>Số n quá lớn! Giá trị n^n tăng rất nhanh và có thể gây tràn số.</p>
+                        <p>Ví dụ: 21^21 ≈ 3.4×10^27</p>
+                        <p>Vui lòng nhập số nhỏ hơn hoặc bằng 20.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            try {
+                const { sum, steps } = calculateS(n);
+                
+                let html = '<div class="result">';
+                
+                // Kết quả
+                html += `
+                    <div class="result-box">
+                        <h3>✅ Kết Quả</h3>
+                        <div>Với n = ${n}</div>
+                        <div class="result-value">S = ${formatNumber(sum)}</div>
+                    </div>
+                `;
+                
+                // Các bước tính
+                html += `
+                    <div class="steps-container">
+                        <h3>📝 Chi Tiết Các Bước Tính</h3>
+                `;
+                
+                steps.forEach((step, index) => {
+                    if (index === 0) {
+                        html += `
+                            <div class="step-item">
+                                <div class="step-label">${step.calculation}</div>
+                                <div class="step-value">S = ${formatNumber(step.runningSum)}</div>
+                            </div>
+                        `;
+                    } else {
+                        html += `
+                            <div class="step-item">
+                                <div class="step-label">
+                                    Số hạng ${step.term}: ${step.calculation}
+                                </div>
+                                <div class="step-value">
+                                    Giá trị số hạng: ${formatNumber(step.value)}
+                                </div>
+                                <div class="step-running">
+                                    Tổng tích lũy: ${formatNumber(step.runningSum)}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+                
+                html += `</div>`;
+                
+                // Tóm tắt
+                const lastTerm = steps[steps.length - 1];
+                const firstPositive = steps.find(s => s.sign === '+' && s.term > 0);
+                const firstNegative = steps.find(s => s.sign === '-' && s.term > 0);
+                
+                html += `
+                    <div class="summary">
+                        <h4>📊 Thông Tin Chi Tiết:</h4>
+                        <p><strong>Số hạng tử:</strong> ${n + 1} hạng tử (bao gồm -1 và ${n} số hạng từ k=1 đến k=${n})</p>
+                        <p><strong>Công thức tổng quát:</strong> S = -1 + Σ[k=1 đến n] (-1)<sup>k+1</sup> × k<sup>k</sup></p>
+                        <p><strong>Số hạng lớn nhất:</strong> ${lastTerm.term}<sup>${lastTerm.term}</sup> = ${formatNumber(lastTerm.powerValue)}</p>
+                        ${firstPositive ? `<p><strong>Số hạng dương đầu tiên:</strong> ${firstPositive.calculation}</p>` : ''}
+                        ${firstNegative ? `<p><strong>Số hạng âm đầu tiên:</strong> ${firstNegative.calculation}</p>` : ''}
+                        <p><strong>Giá trị cuối cùng:</strong> S = ${formatNumber(sum)}</p>
+                    </div>
+                `;
+                
+                html += '</div>';
+                
+                resultDiv.innerHTML = html;
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h3>❌ Lỗi</h3>
+                        <p>Đã xảy ra lỗi khi tính toán: ${error.message}</p>
+                        <p>Vui lòng thử lại với số nhỏ hơn.</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm Tra Số Đặc Biệt</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai01.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #f5576c;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #f5576c;
+            box-shadow: 0 0 0 3px rgba(245, 87, 108, 0.1);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin-top: 30px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .check-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 15px;
+            border-left: 5px solid #ddd;
+            transition: all 0.3s;
+        }
+
+        .check-item.true {
+            border-left-color: #27ae60;
+            background: linear-gradient(135deg, #e8f8f5 0%, #d5f4e6 100%);
+        }
+
+        .check-item.false {
+            border-left-color: #e74c3c;
+            background: linear-gradient(135deg, #fadbd8 0%, #f8cecc 100%);
+        }
+
+        .check-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .check-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .check-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .check-badge.true {
+            background: #27ae60;
+            color: white;
+        }
+
+        .check-badge.false {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .check-details {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .check-details ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .check-details li {
+            margin: 5px 0;
+        }
+
+        .info-box {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .info-box h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #856404;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+
+        .error {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ffe6e6;
+            border-radius: 10px;
+            border-left: 5px solid #e74c3c;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .error h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .error p {
+            color: #c0392b;
+            font-size: 16px;
+        }
+
+        .summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .summary h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .summary p {
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔢 Kiểm Tra Số Đặc Biệt</h1>
+        <p class="subtitle">Số Nguyên Tố • Số Chính Phương • Số Hoàn Hảo</p>
+        
+        <form onsubmit="checkNumber(event)">
+            <div class="form-group">
+                <label for="number">Nhập số nguyên n:</label>
+                <input type="number" id="number" placeholder="Ví dụ: 28" required>
+            </div>
+            
+            <button type="submit">Kiểm Tra</button>
+        </form>
+
+        <div id="result"></div>
+
+        <div class="info-box">
+            <h4>📚 Định Nghĩa:</h4>
+            <p><strong>Số nguyên tố:</strong> Số tự nhiên lớn hơn 1, chỉ chia hết cho 1 và chính nó.</p>
+            <p><strong>Số chính phương:</strong> Là bình phương của một số nguyên (n = k²).</p>
+            <p><strong>Số hoàn hảo:</strong> Tổng các ước số (không kể chính nó) bằng chính số đó.</p>
+        </div>
+    </div>
+
+    <script>
+        // Kiểm tra số nguyên tố
+        function isPrime(n) {
+            if (n < 2) return false;
+            if (n === 2) return true;
+            if (n % 2 === 0) return false;
+            
+            for (let i = 3; i <= Math.sqrt(n); i += 2) {
+                if (n % i === 0) return false;
+            }
+            return true;
+        }
+
+        // Kiểm tra số chính phương
+        function isPerfectSquare(n) {
+            if (n < 0) return false;
+            const sqrt = Math.sqrt(n);
+            return sqrt === Math.floor(sqrt);
+        }
+
+        // Tìm căn bậc hai của số chính phương
+        function getSquareRoot(n) {
+            return Math.sqrt(n);
+        }
+
+        // Kiểm tra số hoàn hảo
+        function isPerfectNumber(n) {
+            if (n < 2) return false;
+            
+            let sum = 1; // 1 luôn là ước số
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) {
+                    sum += i;
+                    if (i !== n / i) {
+                        sum += n / i;
+                    }
+                }
+            }
+            return sum === n;
+        }
+
+        // Tìm tất cả các ước số
+        function getDivisors(n) {
+            let divisors = [];
+            for (let i = 1; i < n; i++) {
+                if (n % i === 0) {
+                    divisors.push(i);
+                }
+            }
+            return divisors;
+        }
+
+        // Phân tích thừa số nguyên tố
+        function primeFactorization(n) {
+            let factors = [];
+            let d = 2;
+            let temp = n;
+            
+            while (d * d <= temp) {
+                while (temp % d === 0) {
+                    factors.push(d);
+                    temp /= d;
+                }
+                d++;
+            }
+            if (temp > 1) {
+                factors.push(temp);
+            }
+            
+            return factors;
+        }
+
+        // Xử lý form
+        function checkNumber(event) {
+            event.preventDefault();
+            
+            const n = parseInt(document.getElementById('number').value);
+            const resultDiv = document.getElementById('result');
+            
+            // Kiểm tra các điều kiện
+            const primeCheck = isPrime(n);
+            const squareCheck = isPerfectSquare(n);
+            const perfectCheck = isPerfectNumber(n);
+            
+            let html = '<div class="result">';
+            
+            // Kiểm tra số nguyên tố
+            html += `
+                <div class="check-item ${primeCheck ? 'true' : 'false'}">
+                    <div class="check-header">
+                        <span class="check-title">🔴 Số Nguyên Tố</span>
+                        <span class="check-badge ${primeCheck ? 'true' : 'false'}">
+                            ${primeCheck ? '✓ ĐÚNG' : '✗ SAI'}
+                        </span>
+                    </div>
+                    <div class="check-details">
+            `;
+            
+            if (primeCheck) {
+                html += `<p><strong>${n}</strong> là số nguyên tố vì chỉ chia hết cho 1 và ${n}.</p>`;
+            } else {
+                if (n < 2) {
+                    html += `<p><strong>${n}</strong> không phải số nguyên tố vì số nguyên tố phải lớn hơn 1.</p>`;
+                } else {
+                    const factors = primeFactorization(n);
+                    html += `<p><strong>${n}</strong> không phải số nguyên tố.</p>`;
+                    html += `<p>Phân tích thừa số: ${n} = ${factors.join(' × ')}</p>`;
+                }
+            }
+            
+            html += '</div></div>';
+            
+            // Kiểm tra số chính phương
+            html += `
+                <div class="check-item ${squareCheck ? 'true' : 'false'}">
+                    <div class="check-header">
+                        <span class="check-title">🟡 Số Chính Phương</span>
+                        <span class="check-badge ${squareCheck ? 'true' : 'false'}">
+                            ${squareCheck ? '✓ ĐÚNG' : '✗ SAI'}
+                        </span>
+                    </div>
+                    <div class="check-details">
+            `;
+            
+            if (squareCheck) {
+                const sqrt = getSquareRoot(n);
+                html += `<p><strong>${n}</strong> là số chính phương vì ${n} = ${sqrt}²</p>`;
+                html += `<p>√${n} = ${sqrt}</p>`;
+            } else {
+                if (n < 0) {
+                    html += `<p><strong>${n}</strong> không phải số chính phương vì là số âm.</p>`;
+                } else {
+                    const sqrt = Math.sqrt(n);
+                    const lower = Math.floor(sqrt);
+                    const upper = Math.ceil(sqrt);
+                    html += `<p><strong>${n}</strong> không phải số chính phương.</p>`;
+                    html += `<p>${lower}² = ${lower * lower} < ${n} < ${upper * upper} = ${upper}²</p>`;
+                }
+            }
+            
+            html += '</div></div>';
+            
+            // Kiểm tra số hoàn hảo
+            html += `
+                <div class="check-item ${perfectCheck ? 'true' : 'false'}">
+                    <div class="check-header">
+                        <span class="check-title">🟢 Số Hoàn Hảo</span>
+                        <span class="check-badge ${perfectCheck ? 'true' : 'false'}">
+                            ${perfectCheck ? '✓ ĐÚNG' : '✗ SAI'}
+                        </span>
+                    </div>
+                    <div class="check-details">
+            `;
+            
+            if (n >= 1) {
+                const divisors = getDivisors(n);
+                const sum = divisors.reduce((a, b) => a + b, 0);
+                
+                html += `<p><strong>Các ước số của ${n}:</strong> ${divisors.join(', ')}</p>`;
+                html += `<p><strong>Tổng các ước:</strong> ${divisors.join(' + ')} = ${sum}</p>`;
+                
+                if (perfectCheck) {
+                    html += `<p><strong>${n}</strong> là số hoàn hảo vì tổng các ước bằng ${n}.</p>`;
+                } else {
+                    html += `<p><strong>${n}</strong> không phải số hoàn hảo vì ${sum} ≠ ${n}.</p>`;
+                }
+            } else {
+                html += `<p><strong>${n}</strong> không phải số hoàn hảo vì số hoàn hảo phải là số tự nhiên ≥ 1.</p>`;
+            }
+            
+            html += '</div></div>';
+            
+            // Tóm tắt
+            const trueCount = [primeCheck, squareCheck, perfectCheck].filter(x => x).length;
+            let summaryText = '';
+            
+            if (trueCount === 0) {
+                summaryText = `Số ${n} không thuộc loại đặc biệt nào!`;
+            } else if (trueCount === 1) {
+                summaryText = `Số ${n} thuộc 1 loại đặc biệt!`;
+            } else if (trueCount === 2) {
+                summaryText = `Số ${n} thuộc 2 loại đặc biệt!`;
+            } else {
+                summaryText = `Số ${n} thuộc cả 3 loại đặc biệt! 🎉`;
+            }
+            
+            html += `
+                <div class="summary">
+                    <h3>📊 Kết Luận</h3>
+                    <p>${summaryText}</p>
+                </div>
+            `;
+            
+            html += '</div>';
+            
+            resultDiv.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

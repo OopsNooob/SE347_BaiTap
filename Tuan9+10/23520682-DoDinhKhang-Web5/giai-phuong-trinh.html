@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải Phương Trình</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai01.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            background: #f0f0f0;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            min-width: 200px;
+        }
+
+        .tab-button:hover {
+            background: #e0e0e0;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .equation-display {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .equation-text {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #333;
+            font-family: 'Courier New', monospace;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            animation: fadeIn 0.5s;
+        }
+
+        .result h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .solution {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .solution-type {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .solution-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .solution-steps {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .solution-steps p {
+            margin: 5px 0;
+        }
+
+        .error {
+            background: #ffe6e6;
+            border-left-color: #e74c3c;
+        }
+
+        .error h3 {
+            color: #e74c3c;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+
+        sup {
+            font-size: 0.7em;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-button {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📐 Giải Phương Trình</h1>
+        <p class="subtitle">Giải phương trình bậc 1 và bậc 2</p>
+        
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('linear')">Phương Trình Bậc 1</button>
+            <button class="tab-button" onclick="showTab('quadratic')">Phương Trình Bậc 2</button>
+        </div>
+
+        <!-- Phương Trình Bậc 1 -->
+        <div id="linear" class="tab-content active">
+            <div class="equation-display">
+                <div class="equation-text">ax + b = 0</div>
+            </div>
+            
+            <form onsubmit="solveLinear(event)">
+                <div class="form-group">
+                    <label for="a1">Hệ số a:</label>
+                    <input type="number" id="a1" step="any" placeholder="Ví dụ: 2" required>
+                </div>
+                <div class="form-group">
+                    <label for="b1">Hệ số b:</label>
+                    <input type="number" id="b1" step="any" placeholder="Ví dụ: -6" required>
+                </div>
+                <button type="submit">Giải Phương Trình</button>
+            </form>
+            <div id="linearResult"></div>
+        </div>
+
+        <!-- Phương Trình Bậc 2 -->
+        <div id="quadratic" class="tab-content">
+            <div class="equation-display">
+                <div class="equation-text">ax² + bx + c = 0</div>
+            </div>
+            
+            <form onsubmit="solveQuadratic(event)">
+                <div class="form-group">
+                    <label for="a2">Hệ số a:</label>
+                    <input type="number" id="a2" step="any" placeholder="Ví dụ: 1" required>
+                </div>
+                <div class="form-group">
+                    <label for="b2">Hệ số b:</label>
+                    <input type="number" id="b2" step="any" placeholder="Ví dụ: -5" required>
+                </div>
+                <div class="form-group">
+                    <label for="c2">Hệ số c:</label>
+                    <input type="number" id="c2" step="any" placeholder="Ví dụ: 6" required>
+                </div>
+                <button type="submit">Giải Phương Trình</button>
+            </form>
+            <div id="quadraticResult"></div>
+        </div>
+
+        <div class="info-box">
+            <h4>📚 Công Thức:</h4>
+            <p><strong>Bậc 1 (ax + b = 0):</strong></p>
+            <p>• Nếu a ≠ 0: x = -b/a</p>
+            <p>• Nếu a = 0 và b ≠ 0: Vô nghiệm</p>
+            <p>• Nếu a = 0 và b = 0: Vô số nghiệm</p>
+            <br>
+            <p><strong>Bậc 2 (ax² + bx + c = 0):</strong></p>
+            <p>• Δ = b² - 4ac</p>
+            <p>• Δ > 0: Hai nghiệm phân biệt</p>
+            <p>• Δ = 0: Nghiệm kép</p>
+            <p>• Δ < 0: Vô nghiệm</p>
+        </div>
+    </div>
+
+    <script>
+        // Chuyển tab
+        function showTab(tabName) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Giải phương trình bậc 1: ax + b = 0
+        function solveLinear(event) {
+            event.preventDefault();
+            
+            const a = parseFloat(document.getElementById('a1').value);
+            const b = parseFloat(document.getElementById('b1').value);
+            const resultDiv = document.getElementById('linearResult');
+            
+            let html = '<div class="result">';
+            html += '<h3>✅ Kết Quả</h3>';
+            
+            // Trường hợp a = 0
+            if (a === 0) {
+                if (b === 0) {
+                    html += `
+                        <div class="solution">
+                            <div class="solution-type">Phương trình: 0x + 0 = 0</div>
+                            <div class="solution-value">Vô số nghiệm</div>
+                            <div class="solution-steps">
+                                <p><strong>Giải thích:</strong></p>
+                                <p>• Khi a = 0 và b = 0, phương trình trở thành 0 = 0</p>
+                                <p>• Đây là một đẳng thức luôn đúng</p>
+                                <p>• Mọi giá trị x đều là nghiệm của phương trình</p>
+                                <p><strong>Kết luận:</strong> Phương trình có vô số nghiệm (x ∈ ℝ)</p>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div class="solution error">
+                            <div class="solution-type">Phương trình: 0x + ${b} = 0</div>
+                            <div class="solution-value">Vô nghiệm</div>
+                            <div class="solution-steps">
+                                <p><strong>Giải thích:</strong></p>
+                                <p>• Khi a = 0, phương trình trở thành ${b} = 0</p>
+                                <p>• Đây là một mâu thuẫn (${b} ≠ 0)</p>
+                                <p>• Không tồn tại giá trị x nào thỏa mãn</p>
+                                <p><strong>Kết luận:</strong> Phương trình vô nghiệm</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            } else {
+                // Trường hợp a ≠ 0
+                const x = -b / a;
+                html += `
+                    <div class="solution">
+                        <div class="solution-type">Phương trình: ${a}x + ${b} = 0</div>
+                        <div class="solution-value">x = ${x.toFixed(4)}</div>
+                        <div class="solution-steps">
+                            <p><strong>Các bước giải:</strong></p>
+                            <p>1. ${a}x + ${b} = 0</p>
+                            <p>2. ${a}x = ${-b}</p>
+                            <p>3. x = ${-b} / ${a}</p>
+                            <p>4. x = ${x.toFixed(4)}</p>
+                            <br>
+                            <p><strong>Kiểm tra:</strong></p>
+                            <p>${a} × ${x.toFixed(4)} + ${b} = ${(a * x + b).toFixed(6)} ≈ 0 ✓</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            html += '</div>';
+            resultDiv.innerHTML = html;
+        }
+
+        // Giải phương trình bậc 2: ax² + bx + c = 0
+        function solveQuadratic(event) {
+            event.preventDefault();
+            
+            const a = parseFloat(document.getElementById('a2').value);
+            const b = parseFloat(document.getElementById('b2').value);
+            const c = parseFloat(document.getElementById('c2').value);
+            const resultDiv = document.getElementById('quadraticResult');
+            
+            let html = '<div class="result">';
+            html += '<h3>✅ Kết Quả</h3>';
+            
+            // Trường hợp a = 0 (trở thành phương trình bậc 1)
+            if (a === 0) {
+                if (b === 0) {
+                    if (c === 0) {
+                        html += `
+                            <div class="solution">
+                                <div class="solution-type">Phương trình: 0x² + 0x + 0 = 0</div>
+                                <div class="solution-value">Vô số nghiệm</div>
+                                <div class="solution-steps">
+                                    <p><strong>Giải thích:</strong></p>
+                                    <p>• Khi a = b = c = 0, phương trình trở thành 0 = 0</p>
+                                    <p>• Mọi giá trị x đều thỏa mãn</p>
+                                    <p><strong>Kết luận:</strong> Phương trình có vô số nghiệm</p>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        html += `
+                            <div class="solution error">
+                                <div class="solution-type">Phương trình: 0x² + 0x + ${c} = 0</div>
+                                <div class="solution-value">Vô nghiệm</div>
+                                <div class="solution-steps">
+                                    <p><strong>Giải thích:</strong></p>
+                                    <p>• Phương trình trở thành ${c} = 0</p>
+                                    <p>• Đây là mâu thuẫn</p>
+                                    <p><strong>Kết luận:</strong> Phương trình vô nghiệm</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                } else {
+                    const x = -c / b;
+                    html += `
+                        <div class="solution">
+                            <div class="solution-type">Phương trình bậc 1: ${b}x + ${c} = 0</div>
+                            <div class="solution-value">x = ${x.toFixed(4)}</div>
+                            <div class="solution-steps">
+                                <p><strong>Chú ý:</strong> Khi a = 0, đây là phương trình bậc 1</p>
+                                <p><strong>Các bước giải:</strong></p>
+                                <p>1. ${b}x + ${c} = 0</p>
+                                <p>2. ${b}x = ${-c}</p>
+                                <p>3. x = ${x.toFixed(4)}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            } else {
+                // Trường hợp a ≠ 0 (phương trình bậc 2 thật sự)
+                const delta = b * b - 4 * a * c;
+                
+                html += `
+                    <div class="solution">
+                        <div class="solution-type">Phương trình: ${a}x² + ${b}x + ${c} = 0</div>
+                `;
+                
+                // Tính delta
+                html += `
+                    <div class="solution-steps">
+                        <p><strong>Tính Delta (Δ):</strong></p>
+                        <p>Δ = b² - 4ac</p>
+                        <p>Δ = ${b}² - 4×${a}×${c}</p>
+                        <p>Δ = ${b * b} - ${4 * a * c}</p>
+                        <p>Δ = ${delta.toFixed(4)}</p>
+                        <br>
+                `;
+                
+                if (delta < 0) {
+                    html += `
+                        <p><strong>Kết luận:</strong> Δ < 0</p>
+                        <div class="solution-value">Vô nghiệm</div>
+                        <p style="color: #e74c3c;">Phương trình vô nghiệm thực</p>
+                    `;
+                } else if (delta === 0) {
+                    const x = -b / (2 * a);
+                    html += `
+                        <p><strong>Kết luận:</strong> Δ = 0 (nghiệm kép)</p>
+                        <div class="solution-value">x₁ = x₂ = ${x.toFixed(4)}</div>
+                        <p><strong>Công thức:</strong></p>
+                        <p>x = -b / (2a)</p>
+                        <p>x = ${-b} / ${2 * a}</p>
+                        <p>x = ${x.toFixed(4)}</p>
+                        <br>
+                        <p><strong>Kiểm tra:</strong></p>
+                        <p>${a}×(${x.toFixed(4)})² + ${b}×${x.toFixed(4)} + ${c} ≈ 0 ✓</p>
+                    `;
+                } else {
+                    const sqrtDelta = Math.sqrt(delta);
+                    const x1 = (-b + sqrtDelta) / (2 * a);
+                    const x2 = (-b - sqrtDelta) / (2 * a);
+                    html += `
+                        <p><strong>Kết luận:</strong> Δ > 0 (hai nghiệm phân biệt)</p>
+                        <div class="solution-value">
+                            x₁ = ${x1.toFixed(4)}<br>
+                            x₂ = ${x2.toFixed(4)}
+                        </div>
+                        <p><strong>Công thức:</strong></p>
+                        <p>x₁ = (-b + √Δ) / (2a) = (${-b} + ${sqrtDelta.toFixed(4)}) / ${2 * a} = ${x1.toFixed(4)}</p>
+                        <p>x₂ = (-b - √Δ) / (2a) = (${-b} - ${sqrtDelta.toFixed(4)}) / ${2 * a} = ${x2.toFixed(4)}</p>
+                        <br>
+                        <p><strong>Kiểm tra:</strong></p>
+                        <p>x₁: ${a}×(${x1.toFixed(4)})² + ${b}×${x1.toFixed(4)} + ${c} ≈ 0 ✓</p>
+                        <p>x₂: ${a}×(${x2.toFixed(4)})² + ${b}×${x2.toFixed(4)} + ${c} ≈ 0 ✓</p>
+                    `;
+                }
+                
+                html += '</div></div>';
+            }
+            
+            html += '</div>';
+            resultDiv.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

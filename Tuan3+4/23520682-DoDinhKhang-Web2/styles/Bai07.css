@@ -1,0 +1,45 @@
+body {
+  background: url(../images/nguyen-tac-trong-thiet-ke-do-hoa.jpg) left top repeat-x fixed,
+              url(../images/truong_day_thiet_ke_do_hoa.jpg) 20% bottom no-repeat fixed,
+              url(../images/nghihoc.png)  bottom right no-repeat fixed;
+  margin-top: 150px;
+  font: 12pt Arial, sans-serif;
+}
+
+.tieude {
+  color: #0DBB00;
+  text-align: center;
+  text-shadow: 1px 1px 2px #1A7300;
+}
+
+#myTable {
+  width: 50%;
+  border: 5px solid #0DBB00;
+  margin: 0px auto;
+}
+
+th, td {
+  border: 1px solid #0DBB00;
+  padding: 5px;
+  color: #000000;
+}
+
+.dongtieude {
+  background-color: #0DBB00;
+  text-align: center;
+}
+
+.dongle {
+  background-color: rgba(255, 250, 135, 0.5);
+  text-align: center;
+}
+
+.dongchan {
+  background-color: rgba(121, 255, 252, 0.5);
+  text-align: center;
+}
+
+.dongcuoi {
+  background-color: rgba(255, 149, 44, 0.5);
+  text-align: center;
+}

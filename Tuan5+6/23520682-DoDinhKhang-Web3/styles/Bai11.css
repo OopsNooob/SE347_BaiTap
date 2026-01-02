@@ -1,0 +1,169 @@
+body{
+  font: 12pt/20pt Arial, Helvetica, sans-serif;
+  background-color: aqua;
+}
+
+h1{
+  color: #FF0000;
+  text-align: center;
+}
+
+#mytable{
+  width: 50%;
+  text-align: center;
+  margin: 100px auto;
+  border: 2px dotted #FF0000;
+  border-radius: 20px;
+  background: url(../images/doran.png) center no-repeat;
+  background-size: cover;
+  padding: 20px;
+}
+
+#mytable tr {
+  display: table-row;
+}
+
+#mytable td {
+  padding: 10px;
+}
+
+.txt{
+  border: 1px dotted #FF0000;
+  border-radius: 20px;
+  background-color: rgba(255, 0, 0, 0.25);
+  padding: 10px;
+  margin: 5px;
+  width: 200px;
+}
+
+.btn{
+  background-image: linear-gradient(#990000, #FF0000);
+  padding: 10px 20px;
+  border: 0px;
+  border-radius: 20px;
+  color: #FFFFFF;
+  font-weight: bold;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-image: linear-gradient(#FF0000, #990000);
+}
+
+.td{
+  color: aqua;
+}
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 10pt;
+    line-height: 18pt;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  #mytable {
+    width: 80%;
+    margin: 50px auto;
+    padding: 15px;
+  }
+  
+  .txt {
+    width: 180px;
+    padding: 8px;
+    font-size: 0.95rem;
+  }
+  
+  .btn {
+    padding: 8px 16px;
+    font-size: 0.95rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 9pt;
+    line-height: 16pt;
+    padding: 10px;
+  }
+  
+  h1 {
+    font-size: 1.3rem;
+    margin: 15px 0;
+  }
+  
+  #mytable {
+    width: 95%;
+    margin: 20px auto;
+    padding: 20px 10px;
+    background-position: center bottom;
+    background-size: 150px;
+  }
+  
+  #mytable tr {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  #mytable td {
+    display: block;
+    width: 100% !important;
+    text-align: center !important;
+    padding: 5px;
+  }
+  
+  #mytable td[align="right"],
+  #mytable td[align="left"] {
+    text-align: center !important;
+  }
+  
+  .txt {
+    width: 90%;
+    max-width: 300px;
+    padding: 10px;
+    font-size: 0.9rem;
+    margin: 5px auto;
+    display: block;
+  }
+  
+  .btn {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    margin: 5px;
+    display: inline-block;
+  }
+  
+  #mytable tr:first-child td {
+    padding-bottom: 10px;
+  }
+  
+  #mytable tr:last-child td {
+    padding-top: 10px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  h1 {
+    font-size: 1.1rem;
+  }
+  
+  #mytable {
+    width: 98%;
+    padding: 15px 8px;
+    background-size: 120px;
+  }
+  
+  .txt {
+    width: 95%;
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+  
+  .btn {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}

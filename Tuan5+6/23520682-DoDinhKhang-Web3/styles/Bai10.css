@@ -1,0 +1,245 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font: 10pt/20pt Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+    background: url(../images/co-vietnam.png) center center no-repeat fixed;
+    margin: 0px 20px;
+}
+.tieude {
+    color: red;
+    text-align: center;
+}
+.hinhtrai {
+    float: left;
+    margin-right: 10px;
+}
+.hinhphai {
+    float: right;
+    margin-left: 10px;
+}
+.hinhgiua {
+    text-align: center;
+}
+.vedautrang {
+    text-align: right;
+}
+h3 {
+    color: white;
+    padding: 5px;
+    margin: 15px 0px;
+}
+.nendo {
+    background-color: red;
+}
+.nentim {
+    background-color: purple;
+}
+.nenhong {
+    background-color: magenta;
+}
+p {
+    text-align: justify;
+}
+p.dropcap:first-letter {
+    float: left;
+    margin-right: 10px;
+    color: yellow;
+    text-shadow: 2px 2px 2px red;
+    font-size: 50pt;
+}
+p.chuthichhinh {
+    font-weight: bold;
+    font-style: italic;
+    text-align:center;
+}
+#nutTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 20pt;
+    color: white;
+    background-color: rgba(255,0,0,0.5);
+    padding: 10px;
+    border: 0px;
+    width: 50px;
+    border-radius: 100%;
+    cursor: pointer;
+    z-index: 1000;
+}
+#sg {
+    column-count: 3;
+    column-rule-style: dashed;
+    column-rule-color: darkgray;
+}
+img {
+    max-width: 100%;
+    height:auto;
+}
+
+ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+li {
+    margin: 5px 0;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 9pt;
+        line-height: 18pt;
+        margin: 0px 10px;
+    }
+    
+    h1.tieude {
+        font-size: 1.3rem;
+        margin: 15px 5px;
+    }
+    
+    h3 {
+        font-size: 1rem;
+        padding: 5px;
+    }
+    
+    #sg {
+        column-count: 1;
+    }
+    
+    p.dropcap:first-letter {
+        font-size: 40pt;
+    }
+    
+    #nutTop {
+        font-size: 16pt;
+        padding: 8px;
+        width: 40px;
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .hinhphai {
+        float: none;
+        display: block;
+        margin: 10px auto;
+        max-width: 300px;
+    }
+    
+    /* Keep map on left */
+    .hinhtrai {
+        float: left;
+        max-width: 150px;
+        margin-right: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 8pt;
+        line-height: 16pt;
+        margin: 0px 5px;
+        background-size: 80%;
+    }
+    
+    h1.tieude {
+        font-size: 1.1rem;
+        margin: 10px 5px;
+    }
+    
+    h3 {
+        font-size: 0.9rem;
+        padding: 5px;
+        margin: 10px 0px;
+    }
+    
+    #sg {
+        column-count: 1;
+    }
+    
+    p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    p.dropcap:first-letter {
+        font-size: 30pt;
+        margin-right: 5px;
+    }
+    
+    #nutTop {
+        font-size: 18pt;
+        padding: 10px;
+        width: 45px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .hinhphai {
+        float: none;
+        display: block;
+        margin: 15px auto;
+        max-width: 250px;
+    }
+    
+    .hinhtrai {
+        float: left;
+        max-width: 120px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    
+    ul {
+        margin-left: 15px;
+        padding-left: 10px;
+    }
+    
+    .hinhgiua img {
+        margin: 10px 0;
+    }
+    
+    .vedautrang {
+        text-align: center;
+        margin: 10px 0;
+    }
+    
+    .hinhgiua img[onclick] {
+        width: 30px;
+        height: 30px;
+        margin: 5px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    body {
+        font-size: 7.5pt;
+    }
+    
+    h1.tieude {
+        font-size: 1rem;
+    }
+    
+    h3 {
+        font-size: 0.85rem;
+    }
+    
+    p {
+        font-size: 0.85rem;
+    }
+    
+    .hinhtrai {
+        max-width: 100px;
+        margin-right: 8px;
+    }
+    
+    .hinhphai {
+        max-width: 200px;
+    }
+    
+    #nutTop {
+        font-size: 16pt;
+        padding: 8px;
+        width: 40px;
+    }
+}

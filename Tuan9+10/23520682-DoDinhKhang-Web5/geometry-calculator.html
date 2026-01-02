@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Diện Tích và Chu Vi</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai01.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            background: #f0f0f0;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            min-width: 150px;
+        }
+
+        .tab-button:hover {
+            background: #e0e0e0;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .result p {
+            color: #333;
+            font-size: 18px;
+            margin: 8px 0;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📐 Tính Diện Tích và Chu Vi</h1>
+        
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('square')">Hình Vuông</button>
+            <button class="tab-button" onclick="showTab('circle')">Hình Tròn</button>
+            <button class="tab-button" onclick="showTab('triangle')">Tam Giác</button>
+        </div>
+
+        <!-- Hình Vuông -->
+        <div id="square" class="tab-content active">
+            <form onsubmit="calculateSquare(event)">
+                <div class="form-group">
+                    <label for="squareSide">Nhập độ dài cạnh (a):</label>
+                    <input type="number" id="squareSide" step="0.01" required>
+                </div>
+                <button type="submit">Tính Toán</button>
+            </form>
+            <div id="squareResult"></div>
+        </div>
+
+        <!-- Hình Tròn -->
+        <div id="circle" class="tab-content">
+            <form onsubmit="calculateCircle(event)">
+                <div class="form-group">
+                    <label for="circleRadius">Nhập bán kính (r):</label>
+                    <input type="number" id="circleRadius" step="0.01" required>
+                </div>
+                <button type="submit">Tính Toán</button>
+            </form>
+            <div id="circleResult"></div>
+        </div>
+
+        <!-- Tam Giác -->
+        <div id="triangle" class="tab-content">
+            <form onsubmit="calculateTriangle(event)">
+                <div class="form-group">
+                    <label for="sideA">Nhập cạnh a:</label>
+                    <input type="number" id="sideA" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="sideB">Nhập cạnh b:</label>
+                    <input type="number" id="sideB" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="sideC">Nhập cạnh c:</label>
+                    <input type="number" id="sideC" step="0.01" required>
+                </div>
+                <button type="submit">Tính Toán</button>
+            </form>
+            <div id="triangleResult"></div>
+        </div>
+    </div>
+
+    <script>
+        // Chuyển đổi tab
+        function showTab(tabName) {
+            // Ẩn tất cả tab content
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Bỏ active cho tất cả button
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            // Hiển thị tab được chọn
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Tính hình vuông
+        function calculateSquare(event) {
+            event.preventDefault();
+            const side = parseFloat(document.getElementById('squareSide').value);
+            
+            if (side <= 0) {
+                showError('squareResult', 'Cạnh phải lớn hơn 0!');
+                return;
+            }
+            
+            const perimeter = 4 * side;
+            const area = side * side;
+            
+            displayResult('squareResult', perimeter, area);
+        }
+
+        // Tính hình tròn
+        function calculateCircle(event) {
+            event.preventDefault();
+            const radius = parseFloat(document.getElementById('circleRadius').value);
+            
+            if (radius <= 0) {
+                showError('circleResult', 'Bán kính phải lớn hơn 0!');
+                return;
+            }
+            
+            const perimeter = 2 * Math.PI * radius;
+            const area = Math.PI * radius * radius;
+            
+            displayResult('circleResult', perimeter, area);
+        }
+
+        // Tính tam giác
+        function calculateTriangle(event) {
+            event.preventDefault();
+            const a = parseFloat(document.getElementById('sideA').value);
+            const b = parseFloat(document.getElementById('sideB').value);
+            const c = parseFloat(document.getElementById('sideC').value);
+            
+            // Kiểm tra điều kiện tồn tại tam giác
+            if (a <= 0 || b <= 0 || c <= 0) {
+                showError('triangleResult', 'Các cạnh phải lớn hơn 0!');
+                return;
+            }
+            
+            if (a + b <= c || a + c <= b || b + c <= a) {
+                showError('triangleResult', 'Ba cạnh không tạo thành tam giác hợp lệ!');
+                return;
+            }
+            
+            const perimeter = a + b + c;
+            const p = perimeter / 2; // Nửa chu vi
+            const area = Math.sqrt(p * (p - a) * (p - b) * (p - c)); // Công thức Heron
+            
+            displayResult('triangleResult', perimeter, area);
+        }
+
+        // Hiển thị kết quả
+        function displayResult(elementId, perimeter, area) {
+            const resultDiv = document.getElementById(elementId);
+            resultDiv.innerHTML = `
+                <div class="result">
+                    <h3>✅ Kết Quả:</h3>
+                    <p><strong>Chu vi (P):</strong> ${perimeter.toFixed(2)}</p>
+                    <p><strong>Diện tích (S):</strong> ${area.toFixed(2)}</p>
+                </div>
+            `;
+        }
+
+        // Hiển thị lỗi
+        function showError(elementId, message) {
+            const resultDiv = document.getElementById(elementId);
+            resultDiv.innerHTML = `
+                <div class="result" style="border-left-color: #e74c3c;">
+                    <h3 style="color: #e74c3c;">❌ Lỗi:</h3>
+                    <p class="error">${message}</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

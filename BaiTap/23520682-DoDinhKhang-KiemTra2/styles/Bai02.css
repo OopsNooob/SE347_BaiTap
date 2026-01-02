@@ -1,0 +1,126 @@
+:root{
+  --airred-1: #C00000; 
+  --airred-2: #B30000; 
+  --airred-3: #FF4D4D; 
+}
+
+body{
+  scroll-behavior: smooth;
+  background: #FDF5F4;
+  padding-top: 0;
+}
+
+
+.navbar.fixed-top{
+  background: var(--airred-1) !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+}
+.navbar-brand { font-weight: 700; color: #fff; }
+
+
+.hero {
+  background:
+    linear-gradient(rgba(220,50,50,0.92), rgba(220,50,50,0.90)),
+    url('../images/map_bg.avif') no-repeat center/cover;
+  color: #fff;
+  padding: 140px 0 48px;
+  position: relative;
+  background-blend-mode: multiply;
+  margin-top: 0; 
+}
+.hero h1{
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+.hero .lead {
+  color: rgba(255,255,255,0.95);
+  font-size: 1.125rem;
+}
+
+.search-card{
+  margin-top: 30px;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  background: #fff;
+}
+.heading-cta {
+  color: var(--airred-1);
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+label { font-weight: 600; color: #6b1b1b; }
+
+.nav-link, .navbar-brand, .btn{ transition: .15s ease-in-out; }
+.nav-link { color: #fff !important; }
+.nav-link:hover { opacity: 0.5 !important; }
+.navbar-brand:hover { color: var(--airred-3) !important; }
+
+.btn-airred {
+  background: var(--airred-1);
+  color: white;
+  border-radius: 8px;
+  border: 0;
+  padding: 10px 18px;
+  font-weight: 700;
+}
+.btn-airred:hover{ background: var(--airred-3); }
+
+.card-suggestion{
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+  background: white;
+  padding: 18px;
+  margin-bottom: 18px;
+  border: 1px solid #FDF5F4;
+}
+.price { font-size: 1.35rem; color: var(--airred-1); font-weight: 800; }
+
+#backToTop {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: var(--airred-3);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+#backToTop:hover { 
+  background: var(--airred-3);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+footer {
+  background: var(--airred-1);
+  color: #fff;
+  padding: 18px 0;
+  margin-top: 30px;
+  text-align: center;
+}
+
+footer .container {
+  position: relative;
+  padding-right: 70px;
+}
+
+.suggestions-row .col { padding-left: 8px; padding-right: 8px; }
+.search-controls .form-control { min-height: 48px; }
+@media (max-width: 576px){
+  .hero h1 { font-size: 2rem; }
+  .search-card { padding: 16px; }
+}

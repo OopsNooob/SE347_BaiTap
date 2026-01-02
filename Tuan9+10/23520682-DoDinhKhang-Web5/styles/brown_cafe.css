@@ -1,0 +1,358 @@
+/* CSS Document */
+
+/* 1. ĐỊNH NGHĨA CÁC BIẾN MÀU SẮC (THEME MẶC ĐỊNH: NÂU VÀNG) */
+:root {
+    --main-dark: #4B2802;      /* Nâu đậm (Text, Border) */
+    --main-light: #CCA45C;     /* Nâu vàng (Active menu, Header bg) */
+    --menu-bg: #FEE8D1;        /* Nâu hồng (Menu bg) */
+    --body-bg: #BC7F10;        /* Nền trang web */
+    --text-shadow: rgba(75,40,2,0.35);
+}
+
+/* 2. ĐỊNH NGHĨA THEME XANH LÁ [cite: 8] */
+body.theme-green {
+    --main-dark: #004d00;      /* Xanh rêu đậm */
+    --main-light: #66bb6a;     /* Xanh lá tươi */
+    --menu-bg: #e8f5e9;        /* Xanh rất nhạt */
+    --body-bg: #81c784;        /* Nền xanh */
+    --text-shadow: rgba(0, 77, 0, 0.35);
+}
+
+/* 3. ĐỊNH NGHĨA THEME ĐỎ HỒNG [cite: 9] */
+body.theme-pink {
+    --main-dark: #880e4f;      /* Đỏ mận đậm */
+    --main-light: #ec407a;     /* Hồng đậm */
+    --menu-bg: #fce4ec;        /* Hồng phấn nhạt */
+    --body-bg: #f48fb1;        /* Nền hồng */
+    --text-shadow: rgba(136, 14, 79, 0.35);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font:12px Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--main-dark); /* Đã thay bằng biến */
+    background: var(--body-bg) url(../images/coffee_seed.png) repeat-x fixed;
+    transition: background-color 0.5s ease, color 0.3s ease; /* Hiệu ứng chuyển mượt */
+}
+
+/* --- CSS CHO PHẦN CONTROL PANEL MỚI THÊM --- */
+#control-panel {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    background-color: rgba(255,255,255,0.2); /* Nền mờ nhẹ */
+    margin-bottom: 10px;
+}
+
+.theme-switch {
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+.theme-btn {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.theme-brown { background-color: #BC7F10; }
+.theme-green { background-color: #81c784; }
+.theme-pink  { background-color: #f48fb1; }
+
+.bg-switch {
+    margin-right: 10px;
+}
+
+#bgSelect {
+    padding: 5px;
+    border: 1px solid var(--main-dark);
+    color: var(--main-dark);
+    font-weight: bold;
+}
+/* ------------------------------------------- */
+
+#container{
+    width:60%;
+    margin:0 auto;
+    background-color: var(--main-dark); /* Đã thay bằng biến */
+    box-shadow:0px 0px 20px var(--main-dark); /* Đã thay bằng biến */
+}
+
+header{
+    width:100%;
+    padding-top:20px;
+}
+
+main{
+    display:flex; 
+}
+
+#ver_menu{
+    width:25%;
+    padding:20px;
+    background-color: var(--menu-bg);
+    float:left;
+}
+
+#ver_menu a{
+    display:block;
+    padding:10px;
+    color: var(--main-dark);
+    font-weight:bold;
+    text-decoration:none;
+    text-shadow:1px 1px 2px var(--text-shadow);
+    font-size:14px;
+    border-bottom:1px dashed var(--main-dark);
+}
+
+#ver_menu a:hover{
+    color:#FFFFFF;
+    background: var(--main-light) url(../images/coffee_seed.png) right no-repeat;
+    transition: 1s;
+}
+
+#ver_menu .active{
+    background-color: var(--main-light);
+}
+
+#content{
+    width:75%;
+    float:right;
+    background-color:#FFFFFF;
+    padding:20px;
+}
+
+#content img{
+    margin-right:20px;
+}
+
+#logo{
+    text-align:center;
+}
+
+#logo img{
+    max-width:100%;
+    height:auto;
+}
+
+footer{
+    width:100%;
+    clear:both;
+    padding:20px;
+    font-size:10px;
+    color: var(--main-light); 
+}
+
+footer a{
+    color: var(--main-light); 
+    text-decoration:none;
+}
+
+footer a:hover{
+    color: var(--body-bg); 
+    text-decoration:underline;
+}
+
+#links{
+    width:50%;
+    float:left;
+}
+
+#copyright{
+    width:50%;
+    float:right;
+    text-align:right;
+}
+
+#content_header{
+    width:100%;
+    padding:20px;
+    margin-bottom:20px;
+    font-size:16px;
+    font-weight:bold;
+    background-color: var(--main-light);
+    border-top:1px dashed var(--main-dark); 
+    border-bottom:1px dashed var(--main-dark);
+    text-shadow:1px 1px 2px var(--text-shadow);
+}
+
+#content h2{
+    margin:20px auto;
+}
+
+.img_100{
+    width:100%; 
+    height:auto; 
+}
+
+.img_50{
+    width:50%;
+    height:auto;
+    margin:20px 0px;
+}
+
+.three-colums{
+    column-count:3; 
+    column-rule:dashed; 
+    column-gap:20px; 
+}
+
+.three-colums img{
+    width:100%;
+    height:100px;
+}
+
+.two-colums{
+    column-count:2;
+    column-gap:10px;
+}
+
+.items{
+    border: var(--main-dark) 1px dashed; /* Đã thay bằng biến */
+    margin:20px;
+    padding:10px;
+    box-shadow:5px 5px 5px var(--text-shadow);
+}
+
+.items:hover {
+    box-shadow:10px 10px 10px rgba(78,40,1,0.75);
+    transition:1s; 
+    transform:scale(1.1); 
+}
+
+.items img {
+    width:100%;
+    height:auto;
+}
+
+figcaption{
+    font-size:10px;
+    font-weight:bold;
+    background-color: var(--main-light); /* Đã thay bằng biến */
+    padding:5px;
+    text-align:center;
+    break-inside:avoid; 
+}
+
+figcaption .name{
+    font-size:14px;
+}
+
+.colum-break{
+    break-before:column; 
+}
+
+.buy{ 
+    width:30%;
+    float:right;
+    padding:100px 5px;
+}
+
+.txt{ 
+    border:1px dashed var(--main-dark);
+    color: var(--main-dark); 
+    font-weight:bold;
+    padding:5px;
+}
+
+.but{ 
+    color: var(--main-light); 
+    background-color: var(--main-dark);
+    font-weight:bold;
+    padding:5px;
+}
+
+/*Định dạng CSS cho điện thoại di động*/
+@media screen and (max-width: 600px) {
+    #container{
+        width:100%;
+    }
+    main{
+        display:block;
+    }
+    #cafe{
+        display:none;
+    }
+    #ver_menu, #content {
+        width:100%;
+        font-size:10px;
+        padding:5px;
+    }
+    #ver_menu a {
+        width:100%; 
+        float: none;
+        padding: 15px;
+        border-right:none; 
+        border-bottom:1px dashed var(--main-dark);
+    }
+    footer{
+        padding:10px;
+        height:50px;
+    }
+    #links, #copyright{
+        width:100%;
+        text-align:center;
+    }
+    .img_50{
+        width:100%;
+    }
+    .three-colums{
+        column-count:auto; 
+    }
+    .three-colums img{
+        max-width:100%; 
+        height:auto;
+    }
+    .two-colums{
+        column-count:auto; 
+    }
+    .txt{
+        width:100%; 
+    }
+}
+
+/*Định dạng CSS cho máy tính bảng*/
+@media screen and (max-width: 900px) {
+    #container{
+        width:80%; 
+    }
+    main{
+        display:block; 
+    }
+    #cafe{
+        display:none; 
+    }
+    #ver_menu, #content {
+        width:100%; 
+        font-size:10px;
+        padding:5px;
+    }
+    #ver_menu a {
+        float: left; 
+        padding: 15px;
+        border-bottom: none; 
+        border-right:1px dashed var(--main-dark); 
+    }
+    footer{
+        padding:10px;
+        height:50px;
+    }
+    #links, #copyright{
+        width:100%; 
+        text-align:center; 
+    }
+    .img_50{
+        width:100%; 
+    }
+}

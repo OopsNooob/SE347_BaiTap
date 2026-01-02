@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chỉ Có Một Người Thôi</title>
+  <link rel="icon" type="image/x-icon" href=".\images\Bai04.ico">
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      margin: 20px;
+      color: #000;
+    }
+
+    h1 {
+      text-align: center;
+      color: orange;
+      border: 2px solid #01FF01;
+      outline: 2px solid #01FF01;
+      padding: 10px;
+      margin: 20px;    
+      outline-offset: 3px;    
+    }
+    
+    .wrapper{
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 10px;
+    }
+
+    p {
+      text-align: justify;
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    
+    hr{
+        border: none;
+        border-top: 2px solid #FF6600;
+        margin: 15px 0;
+    }
+
+    .first-letter {
+      font-size: 36px;
+      font-weight: bold;
+      color: #00FF00;
+      float: left;
+      margin-right: 5px;
+      font-style: italic;
+      line-height: 1;
+      position: relative;
+      top: -10px;
+    }
+
+    .left-img {
+      float: left;
+      margin: 10px;
+      width: 300px;
+    }
+
+    .right-img {
+      float: right;
+      margin: -100px 10px 10px 10px;
+      width: 200px;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: black;
+      background-color: #FF6600;
+      font-style: italic;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .comment-section {
+      background-color: #00FF00;
+      color: white;
+      font-weight: bold;
+      font-size: 36px;
+      padding: 5px;
+      margin-top: 30px;
+      text-align: right;
+      text-shadow: 2px 2px 2px black; 
+    }
+
+    .comment {
+      margin: 10px 0;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+    }
+
+    .comment img {
+      width: 80px;
+      margin-left: 20px;
+      float: right;
+    }
+
+    @media screen and (max-width: 768px) {
+      body {
+        margin: 15px;
+      }
+      
+      h1 {
+        font-size: 24px;
+        padding: 8px;
+        margin: 15px 10px;
+      }
+      
+      p {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      .left-img {
+        width: 180px;
+        margin: 5px 10px 5px 0;
+      }
+      
+      .right-img {
+        width: 150px;
+        margin: 0 0 10px 10px;
+        float: right;
+      }
+      
+      .comment-section {
+        font-size: 28px;
+      }
+      
+      .comment {
+        font-size: 16px;
+      }
+      
+      .comment img {
+        width: 60px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      body {
+        margin: 10px;
+        font-size: 14px;
+      }
+      
+      h1 {
+        font-size: 20px;
+        padding: 8px;
+        margin: 10px 5px;
+      }
+      
+      p {
+        font-size: 14px;
+        line-height: 1.6;
+        text-align: justify;
+      }
+      
+      .first-letter {
+        font-size: 28px;
+      }
+      
+      .left-img {
+        float: left;
+        width: 45%;
+        max-width: 180px;
+        margin: 0 10px 10px 0;
+      }
+      
+      .right-img {
+        float: right;
+        width: 45%;
+        max-width: 180px;
+        margin: 0 0 10px 10px;
+        clear: none;
+      }
+      
+      .highlight {
+        display: inline;
+        padding: 2px 4px;
+      }
+      
+      hr {
+        margin: 10px 0;
+      }
+      
+      .comment-section {
+        font-size: 22px;
+        padding: 8px;
+        margin-top: 20px;
+      }
+      
+      .comment {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 13px;
+        padding: 8px 5px;
+      }
+      
+      .comment p {
+        margin: 0 0 10px 0;
+        font-size: 13px;
+      }
+      
+      .comment img {
+        width: 50px;
+        margin-left: 0;
+        margin-top: 5px;
+        float: none;
+        align-self: flex-end;
+      }
+    }
+
+    @media screen and (max-width: 360px) {
+      h1 {
+        font-size: 18px;
+      }
+      
+      p, .comment p {
+        font-size: 13px;
+      }
+      
+      .comment-section {
+        font-size: 20px;
+      }
+      
+      .left-img, .right-img {
+        width: 40%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>CHỈ CÓ MỘT NGƯỜI THÔI</h1>
+
+  <p>
+    <span class="first-letter">N</span>gười đến dự đám cưới khá đông. Ông hàng xóm gọi bác làm công đến và bảo:
+  </p>
+  
+  <p>
+    - Này, anh đi xem xem có bao nhiêu người đến dự đám cưới bên ấy.
+  </p>
+
+  <img src="./images/bay-cuu.jpg" alt="Bầy cừu" class="left-img">
+  <img src="./images/ChiCoMotNguoiThoi.gif" alt="Bà lão" class="right-img">
+
+  <p>
+    Bác làm công ra đi. Bác đi lên ngưỡng cửa mới được vài bước thì khách khứa ra khỏi nhà. 
+    Họ bắt đầu ra về. Ai đi ra cũng vấp phải khúc gỗ, vấp lên thì ngã lại tiếp tục đi. 
+    Chỉ có một bà lão vấp phải khúc gỗ, liền quay lại gạt khúc gỗ sang bên. 
+    Bác làm công trở về gặp người chủ.
+  </p>
+
+  <p>
+    Người chủ hỏi: <br>
+    - Ở bên ấy có nhiều người không? <br>
+    Bác làm công trả lời: <br>
+    - Chỉ có một người mà lại là bà lão. <br>
+    - Tại sao vậy? <br>
+    - Bởi vì tôi đi khúc gỗ bên thềm nhà, tất cả đều vấp phải, nhưng chẳng ai buồn dẹp đi. 
+    Thế thì <i>lũ cừu</i> cũng làm như vậy. Nhưng một bà lão đã dẹp khúc gỗ sang bên để người khác khỏi vấp ngã. 
+    Chỉ có con người mới làm như vậy. <span class="highlight">Một mình bà lão là người.</span>
+  </p>
+
+  <div class="comment-section">Bạn đọc bình luận:</div>
+
+  <div class="comment">
+    <p>
+      Câu chuyện ngụ ngôn" Chỉ Có Một Người Thôi" là một câu chuyện hay,có từ ngữ giản dị, xúc tích...hàm chứa những ý nghĩa 
+      thiết thực đáng trân trọng trong cuộc sống thường nhật của chúng ta. Đây là một câu chuyện cũng như một bài học được rút ra 
+      từ đời thường mà có lẽ tác giả đã từng bắt gặp trong một dịp nào đó, nhằm gửi gắm cho những ai có tâm ích kỷ, 
+      có mắt như mù, chỉ biết cá nhân mình mà không hề nghĩ đến bản thân của người khác. Mong rằng tất cả mọi chúng ta,sau khi 
+      đọc câu chuyện trên, hãy noi gương bà lão kia để cuộc sống của chúng ta ngày mỗi thăng hoa và có ý nghĩa hơn. Kính chúc quý 
+      độc giả gặp nhiều an lac, hạnh phúc.
+    </p>
+    <img src="./images/rose2.png" alt="Hoa hồng">
+  </div>
+  <hr>
+
+  <div class="comment">
+    <p>
+      Câu chuyện có khía cạnh đúng. Nếu 1 người mà mọi suy nghĩ, hành động vì bản thân thì người đó chẳng khác gì 1 động vật. 
+      Cái khác biệt nhất giữa 1 con người và 1 con vật là người đó biết sống vì người khác. Nếu nhìn qua thì thấy câu nói hơi cực 
+      đoan, vơ đũa cả nắm nhưng đặt trong hoàn cảnh câu nói được nói ra bởi nhân vật bác làm thuê thì có thể chấp nhận được. 
+      Cái quan trọng là bài học được rút ra!
+    </p>
+    <img src="./images/songoku.gif" alt="Ngọn lửa">
+  </div>
+  <hr>
+
+  <div class="comment">
+    <p>
+      Mình thấy bài này rất hay, vì cuộc sống của chúng ta chỉ thật sự hạnh phúc khi chúng ta biết sống vì người khác. 
+      Muốn người khác làm gì cho mình thì chính mình hãy làm cho họ trước.
+    </p>
+    <img src="./images/xuongrongtinhyeu.jpg" alt="Chiếc lá">
+  </div>
+
+</body>
+</html>

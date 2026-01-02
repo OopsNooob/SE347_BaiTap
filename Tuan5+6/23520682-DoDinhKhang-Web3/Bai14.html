@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scaal Coffee</title>
+    <link rel="stylesheet" href="styles/Bai14.css" />
+     <link rel="icon" type="image/x-icon" href=".\images\Bai14.ico">
+    <script src="scripts/Bai14.js"></script>
+  </head>
+  <body style="display: flex; flex-direction: column; font-family: sans-serif">
+    <!-- Header -->
+    <header id="header">
+      <img src="./images/logo_scaal.gif" />
+    </header>
+    <div style="display: flex; flex-grow: 1">
+      <!-- Sidebar -->
+      <aside
+        style="
+          display: flex;
+          align-items: end;
+          flex-direction: column;
+          justify-content: space-between;
+        "
+      >
+        <div
+          style="
+            margin-top: 60px;
+          "
+        >
+          <div class="ourstory-wrapper" style="display:flex; justify-content:flex-end;">
+            <img src="./images/btn_ourstory_up.gif" id="ourStoryBtn" style="cursor: pointer;" />
+          </div>
+          <div class="products-wrapper" style="display:flex; justify-content:flex-end; height: 50px; margin-top: 40px; position: relative; overflow: visible;">
+            <img src="./images/btn_products_up.gif" id="productsBtn" style="cursor: pointer;" />
+          </div>
+          <div class="thisweek-wrapper" style="display:flex; justify-content:flex-end; height: 50px; margin-top: 40px; position: relative; overflow: visible;">
+            <img src="./images/btn_thisweek_up.gif" id="thisWeekBtn" style="cursor: pointer;" />
+          </div>
+        </div>
+        <div><img src="./images/logo_globe_a.gif" /></div>
+      </aside>
+      <!-- Main Content -->
+      <main
+        id="main"
+        style="display: flex; flex-grow: 1; background-color: #cd9934"
+      >
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-left: 15px;
+            position: relative;
+          "
+        >
+          <div style="position: relative;">
+            <div
+              id="welcomeContent"
+              style="
+                width: 250px;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                font-weight: 600;
+                margin-top: 5px;
+              "
+            >
+              <h1>
+                <span style="font-size: 24px; color: black; font-weight: 600"
+                  >Welcome</span
+                >
+                to the Scaal Coffee web site, home of the finest coffee gifts in
+                the world.
+              </h1>
+              <p>
+                Take a moment to view our many <a href="#">products</a>. We offer
+                fine roasted products as well as items to wear and items for the
+                office.
+              </p>
+              <p>
+                Scaal has been serving fine coffee connoisseurs like you for over
+                50 years. We follow a roasting process that produces the finest
+                coffees in the world.
+              </p>
+              <p>
+                Check with us often to see our
+                <a href="#">special promotions</a> of the week.
+              </p>
+            </div>
+            <div
+              id="ourStoryContent"
+              style="
+                width: 250px;
+                display: none;
+                flex-direction: column;
+                gap: 20px;
+                font-weight: 600;
+                margin-top: 5px;
+                position: absolute;
+                top: 0;
+                left: 0;
+              "
+            >
+              <h1>
+                <span style="font-size: 24px; color: black; font-weight: 600"
+                  >Our Story</span
+                >
+              </h1>
+              <p>
+                What is the one philosophy that drives SCAAL? We believe that no
+                matter where you go, you should always be able to enjoy the simple
+                pleasure of a good cup of coffee in a comfortable environment.
+                At home, reading the morning paper. At your local SCAAL,
+                conversing with a confidant. Or perhaps in some foreign land,
+                SCAAL will be greeting you like an old friend. After all, coffee
+                is a ritual that transcends all cultural boundaries. It makes us
+                feel alert, energetic and alive.
+              </p>
+            </div>
+            <div
+              id="productsContent"
+              style="
+                width: 250px;
+                display: none;
+                flex-direction: column;
+                gap: 20px;
+                font-weight: 600;
+                margin-top: 5px;
+                position: absolute;
+                top: 0;
+                left: 0;
+              "
+            >
+              <h1>
+                <span style="font-size: 24px; color: black; font-weight: 600"
+                  >Products</span
+                >
+              </h1>
+              <p>
+                What makes SCAAL the best coffee? Anders has passed down the knowledge he learned as an apprentice in the coffee fields to every buyer, roaster, and franchise owner. SCAAL's standards for coffee are never compromised. We only select SHB strictly hard bean or strictly high grown coffee beans. To ensure their flavorful oils are preserved, extraordinary steps are taken to protect the coffee bean from heat, light, air and moisture.
+              </p>
+            </div>
+            <div
+              id="thisWeekContent"
+              style="
+                width: 250px;
+                display: none;
+                flex-direction: column;
+                gap: 20px;
+                font-weight: 600;
+                margin-top: 5px;
+                position: absolute;
+                top: 0;
+                left: 0;
+              "
+            >
+              <h1>
+                <span style="font-size: 24px; color: black; font-weight: 600"
+                  >This Week</span
+                >
+              </h1>
+              <p>
+                All these efforts are made so that we may offer you a perfect cup of coffee.
+              </p>
+              <p>
+                There are so many places you could go to buy coffee. We've gone to extraordinary efforts to ensure that SCAAL is your best choice. The quality begins at harvest. SCAAL relies on selective picking, a labor-intensive process that involves making several passes among the trees for those cherries that are perfectly ripe. Then we select top grade SHB, which stands for strictly hard bean or strictly high grown. Beans that are grown at a minimum altitude of 4,000 feet above sea level for optimum flavor. Within hours of shipping our coffee to you, the beans are roasted on-site in small batches by a Certified Roastmaster and vacuum-packed to retain its fresh taste and rich aroma.
+              </p>
+            </div>
+          </div>
+          <div style="margin-left: 70px">
+            <div style="display: flex; align-items: end">
+              <img src="./images/logo_globe_b.gif" />
+            </div>
+          </div>
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            padding: 10px;
+            margin-top: 10px;
+            text-align: center;
+            flex: 1;
+            gap: 10px;
+          "
+        >
+          <div>
+            <img src="./images/brainrot.png" />
+          </div>
+          <div>
+            <img src="./images/coffee-online.gif" />
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xử Lý Mảng Chuỗi</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai01.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-hint {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result {
+            margin-top: 30px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .array-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .array-display h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-align: center;
+        }
+
+        .array-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .array-item {
+            background: white;
+            color: #333;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+
+        .array-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .item-index {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-weight: 600;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .item-value {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            font-weight: 500;
+        }
+
+        .item-length {
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .result-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .result-detail {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .result-detail p {
+            margin: 5px 0;
+        }
+
+        .highlight-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .highlight-box .item-index {
+            background: #ffc107;
+            color: #000;
+        }
+
+        .longest-item {
+            background: #d4edda !important;
+            border: 2px solid #28a745 !important;
+        }
+
+        .longest-item .item-index {
+            background: #28a745 !important;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            color: #667eea;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .comparison-column {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .comparison-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .error {
+            background: #ffe6e6;
+            border-left: 5px solid #e74c3c;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .error h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .error p {
+            color: #c0392b;
+            font-size: 16px;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+
+        .info-box ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .info-box li {
+            color: #555;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Xử Lý Mảng Chuỗi</h1>
+        <p class="subtitle">Sắp xếp và tìm kiếm trong mảng chuỗi</p>
+        
+        <form onsubmit="processStringArray(event)">
+            <div class="form-group">
+                <label for="stringArray">Nhập các chuỗi (mỗi chuỗi một dòng):</label>
+                <textarea id="stringArray" placeholder="Ví dụ:&#10;apple&#10;banana&#10;cat&#10;dog&#10;elephant" required></textarea>
+                <div class="input-hint">💡 Mỗi dòng là một chuỗi trong mảng</div>
+            </div>
+            
+            <button type="submit">Xử Lý Mảng</button>
+        </form>
+
+        <div id="result"></div>
+
+        <div class="info-box">
+            <h4>📚 Các Chức Năng:</h4>
+            <p><strong>a. Sắp xếp theo thứ tự ABC:</strong> Sắp xếp mảng theo thứ tự bảng chữ cái (a-z)</p>
+            <p><strong>b. Tìm chuỗi dài nhất:</strong> Tìm vị trí và giá trị của chuỗi có độ dài lớn nhất</p>
+            <ul>
+                <li>Vị trí bắt đầu từ 0 (index 0)</li>
+                <li>Nếu có nhiều chuỗi cùng độ dài, hiển thị tất cả</li>
+                <li>So sánh không phân biệt hoa thường</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // a. Sắp xếp mảng theo thứ tự ABC
+        function sortAlphabetically(arr) {
+            return [...arr].sort((a, b) => {
+                return a.toLowerCase().localeCompare(b.toLowerCase());
+            });
+        }
+
+        // b. Tìm vị trí chuỗi dài nhất
+        function findLongestStrings(arr) {
+            if (arr.length === 0) return { maxLength: 0, positions: [], values: [] };
+
+            let maxLength = 0;
+            let positions = [];
+            let values = [];
+
+            // Tìm độ dài lớn nhất
+            arr.forEach(str => {
+                if (str.length > maxLength) {
+                    maxLength = str.length;
+                }
+            });
+
+            // Tìm tất cả chuỗi có độ dài bằng maxLength
+            arr.forEach((str, index) => {
+                if (str.length === maxLength) {
+                    positions.push(index);
+                    values.push(str);
+                }
+            });
+
+            return { maxLength, positions, values };
+        }
+
+        // Tính thống kê
+        function analyzeStringArray(arr) {
+            const totalStrings = arr.length;
+            const totalChars = arr.reduce((sum, str) => sum + str.length, 0);
+            const avgLength = (totalChars / totalStrings).toFixed(2);
+            const minLength = Math.min(...arr.map(s => s.length));
+            const maxLength = Math.max(...arr.map(s => s.length));
+            const emptyStrings = arr.filter(s => s.trim() === '').length;
+
+            return { totalStrings, totalChars, avgLength, minLength, maxLength, emptyStrings };
+        }
+
+        // Hiển thị mảng
+        function displayArray(arr, title, highlightIndices = []) {
+            let html = `
+                <div class="array-display">
+                    <h3>${title}</h3>
+                    <div class="array-items">
+            `;
+
+            arr.forEach((str, index) => {
+                const isHighlighted = highlightIndices.includes(index);
+                const itemClass = isHighlighted ? 'array-item longest-item' : 'array-item';
+                
+                html += `
+                    <div class="${itemClass}">
+                        <span class="item-index">${index}</span>
+                        <span class="item-value">${str || '(chuỗi rỗng)'}</span>
+                        <span class="item-length">${str.length} ký tự</span>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+            `;
+
+            return html;
+        }
+
+        // Xử lý form
+        function processStringArray(event) {
+            event.preventDefault();
+            
+            const input = document.getElementById('stringArray').value;
+            const resultDiv = document.getElementById('result');
+            
+            // Parse input thành mảng
+            const arr = input.split('\n').map(s => s.trim());
+            
+            // Kiểm tra mảng rỗng
+            if (arr.length === 0 || (arr.length === 1 && arr[0] === '')) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h3>❌ Lỗi</h3>
+                        <p>Mảng rỗng! Vui lòng nhập ít nhất một chuỗi.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Thực hiện các thao tác
+            const sortedArr = sortAlphabetically(arr);
+            const longestInfo = findLongestStrings(arr);
+            const stats = analyzeStringArray(arr);
+
+            let html = '<div class="result">';
+
+            // Mảng gốc
+            html += displayArray(arr, '📋 Mảng Ban Đầu');
+
+            // Thống kê
+            html += `
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-label">Số phần tử</div>
+                        <div class="stat-value">${stats.totalStrings}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Tổng ký tự</div>
+                        <div class="stat-value">${stats.totalChars}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Độ dài TB</div>
+                        <div class="stat-value">${stats.avgLength}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Ngắn nhất</div>
+                        <div class="stat-value">${stats.minLength}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Dài nhất</div>
+                        <div class="stat-value">${stats.maxLength}</div>
+                    </div>
+                </div>
+            `;
+
+            // a. Sắp xếp theo ABC
+            html += `
+                <div class="result-box">
+                    <h4>a. 🔤 Sắp Xếp Theo Thứ Tự ABC</h4>
+                    ${displayArray(sortedArr, 'Mảng Sau Sắp Xếp')}
+                    <div class="result-detail">
+                        <p><strong>Phương pháp:</strong> Sắp xếp theo thứ tự từ điển (lexicographic order)</p>
+                        <p><strong>Công thức:</strong> array.sort() với localeCompare()</p>
+                        <p><strong>Đặc điểm:</strong> Không phân biệt hoa thường khi so sánh</p>
+            `;
+
+            // So sánh trước/sau
+            html += `
+                        <div class="comparison">
+                            <div class="comparison-column">
+                                <div class="comparison-title">Trước khi sắp xếp</div>
+            `;
+            arr.forEach((str, i) => {
+                html += `<div style="padding: 5px 0;">${i}. ${str}</div>`;
+            });
+            html += `
+                            </div>
+                            <div class="comparison-column">
+                                <div class="comparison-title">Sau khi sắp xếp</div>
+            `;
+            sortedArr.forEach((str, i) => {
+                html += `<div style="padding: 5px 0;">${i}. ${str}</div>`;
+            });
+            html += `
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // b. Chuỗi dài nhất
+            html += `
+                <div class="result-box">
+                    <h4>b. 📏 Tìm Chuỗi Dài Nhất</h4>
+            `;
+
+            if (longestInfo.positions.length === 1) {
+                html += `
+                    <div class="highlight-box">
+                        <div class="array-item longest-item">
+                            <span class="item-index">${longestInfo.positions[0]}</span>
+                            <span class="item-value">${longestInfo.values[0]}</span>
+                            <span class="item-length">${longestInfo.maxLength} ký tự</span>
+                        </div>
+                    </div>
+                    <div class="result-detail">
+                        <p><strong>Vị trí:</strong> Index ${longestInfo.positions[0]}</p>
+                        <p><strong>Giá trị:</strong> "${longestInfo.values[0]}"</p>
+                        <p><strong>Độ dài:</strong> ${longestInfo.maxLength} ký tự</p>
+                        <p><strong>Kết luận:</strong> Chuỗi dài nhất trong mảng nằm ở vị trí ${longestInfo.positions[0]}</p>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div class="highlight-box">
+                        <p style="font-weight: 600; margin-bottom: 10px; color: #856404;">
+                            Có ${longestInfo.positions.length} chuỗi có cùng độ dài lớn nhất:
+                        </p>
+                `;
+                longestInfo.positions.forEach((pos, i) => {
+                    html += `
+                        <div class="array-item longest-item" style="margin: 10px 0;">
+                            <span class="item-index">${pos}</span>
+                            <span class="item-value">${longestInfo.values[i]}</span>
+                            <span class="item-length">${longestInfo.maxLength} ký tự</span>
+                        </div>
+                    `;
+                });
+                html += `
+                    </div>
+                    <div class="result-detail">
+                        <p><strong>Các vị trí:</strong> ${longestInfo.positions.join(', ')}</p>
+                        <p><strong>Độ dài:</strong> ${longestInfo.maxLength} ký tự</p>
+                        <p><strong>Danh sách chuỗi dài nhất:</strong></p>
+                        <ul>
+                `;
+                longestInfo.values.forEach((val, i) => {
+                    html += `<li>Vị trí ${longestInfo.positions[i]}: "${val}"</li>`;
+                });
+                html += `
+                        </ul>
+                    </div>
+                `;
+            }
+
+            html += `</div>`;
+
+            // Hiển thị mảng gốc với highlight
+            html += `
+                <div class="result-box" style="background: #e8f5e9; border-left-color: #4caf50;">
+                    <h4 style="color: #2e7d32;">📌 Mảng Gốc (Đánh Dấu Chuỗi Dài Nhất)</h4>
+                    ${displayArray(arr, '', longestInfo.positions)}
+                    <div class="result-detail">
+                        <p>✅ Các chuỗi được đánh dấu màu xanh là chuỗi dài nhất trong mảng</p>
+                    </div>
+                </div>
+            `;
+
+            html += '</div>';
+            resultDiv.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

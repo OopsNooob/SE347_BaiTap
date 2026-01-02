@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt tour</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai13.ico">
+    <link rel="stylesheet" type="text/css" href="styles/Bai13.css">
+    <script src="scripts/Bai13.js"></script>
+</head>
+
+<body>
+    <h1 align="center">ĐĂNG KÝ DU LỊCH</h1>
+    <form id="frmDatTour" name="frmDatTour" method="post" action="xuLyDatTour.php" onSubmit="inThongBao();">
+        <table width="55%" align="center" cellpadding="5" cellspacing="0" class="myTable">
+            <tr>
+                <td align="right">Họ tên:</td>
+                <td><input name="txtHoTen" type="text" autofocus required class="txt" id="txtHoTen" size="25"> (*)</td>
+            </tr>
+            <tr>
+                <td align="right">Địa chỉ:</td>
+                <td><textarea name="txaDiaChi" cols="30" rows="2" required class="txt" id="txaDiaChi"></textarea> <span style="vertical-align:top">(*)</span></td>
+            </tr>
+            <tr>
+                <td align="right">Điện thoại:</td>
+                <td><input name="txtDienThoai" type="text" required class="txt" id="txtDienThoai"> (*)</td>
+            </tr>
+            <tr>
+                <td align="right">Khách Việt Nam:</td>
+                <td><input name="chkKhachVN" type="checkbox" class="txt" id="chkKhachVN" checked="checked"></td>
+            </tr>
+            <tr>
+                <td align="right">Chọn tour:</td>
+                <td>
+                    <select name="selChonTour" class="txt" id="selChonTour">
+                        <optgroup label="Miền Bắc">
+                            <option value="1" selected="selected">Hà Nội - Hạ Long - Sapa</option>
+                            <option value="2">Hà Nội - Chùa Hương - Ninh Bình</option>
+                            <option value="3">Hà Nội - Cát Bà - Tuần Châu</option>
+                        </optgroup>
+                        <optgroup label="Miền Trung">
+                            <option value="4">Huế - Bạch Mã - Đà Nẵng</option>
+                            <option value="5">Nha Trang - Đà Lạt</option>
+                            <option value="6">Buôn Mê Thuột - Gia Lai - Kontum</option>
+                        </optgroup>
+                        <optgroup label="Miền Nam">
+                            <option value="7">TPHCM - Cần Thơ - Cà Mau</option>
+                            <option value="8">Phú Quốc - Côn Đảo</option>
+                        </optgroup>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">Phương tiện:</td>
+                <td>
+                    <label><input name="phuongtien" type="radio" id="maybay" value="1" checked="checked"> Máy bay</label>
+                    <label><input name="phuongtien" type="radio" id="xedulich" value="2"> Xe du lịch</label>
+                    <label><input name="phuongtien" type="radio" id="tutuc" value="3"> Tự túc</label>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                <td colspan="2" align="center">
+                    <fieldset>
+                        <legend>Số lượng khách đoàn</legend>
+                        <label for="numNguoiLon">Người lớn:</label>
+                        <input name="numNguoiLon" type="number" class="txt" id="numNguoiLon" min="1" step="1" value="1" style="width:50px">
+                        <label for="numTreEm">Trẻ em:</label>
+                        <input name="numTreEm" type="number" class="txt" id="numTreEm" min="0" step="1" value="1" style="width:50px">
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">Ghi chú:</td>
+                <td><textarea name="txaGhiChu" cols="30" rows="3" class="txt" id="txaGhiChu"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input name="button" type="submit" class="btn" id="submit" value="Đồng ý"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

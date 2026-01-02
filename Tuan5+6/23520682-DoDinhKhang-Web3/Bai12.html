@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu đăng ký</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai12.ico">
+    <link rel="stylesheet" type="text/css" href="styles/Bai12.css">
+    <script src="scripts/Bai12.js"></script>
+</head>
+<body onLoad="txtHoTen.focus();">
+<h1 class="tieude">Phiếu đăng ký</h1>
+<form id="frmPhieuDangKy" name="frmPhieuDangKy" method="post" action="xulyDangKy.php" onSubmit="inThongBao();">
+    <table width="42%" height="480" border="0" align="center" cellpadding="5" cellspacing="0" class="mytable">
+        <tr>
+            <td width="45%" align="right">Họ tên</td>
+            <td width="55%">
+                <input name="txtHoTen" type="text" autofocus required class="txt" id="txtHoTen" value="" size="30">(*)</td>
+        </tr>
+        <tr>
+            <td align="right">Email</td>
+            <td><input name="txtEmail" type="email" required class="txt" id="txtEmail">(*)</td>
+        </tr>
+        <tr>
+           <td align="right">Điện thoại</td>
+           <td><input name="txtDienThoai" type="tel" required class="txt" id="txtDienThoai">(*)</td> 
+        </tr>
+        <tr>
+            <td align="right">Giới tính</td>
+            <td>
+                <label>
+                    <input name="rdoGioiTinh" type="radio" id="nam" value="1" checked="checked">
+                    Nam</label>
+                <label>
+                    <input name="rdoGioiTinh" type="radio" value="0" id="nu">
+                    Nữ</label>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">Nghề nghiệp</td>
+            <td>
+                <select name="selNgheNghiep" class="txt" id="selNgheNghiep">
+                    <option value="0" selected="selected">Sinh viên</option>
+                    <option value="1">Bác sỹ</option>
+                    <option value="2">Kỹ sư</option>
+                    <option value="3">Giáo viên</option>
+                    <option value="4">Khác</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">Chọn sản phẩm</td>
+            <td>
+                <select name="selSanPham" multiple="MULTIPLE" class="txt" id="selSanPham">
+                    <option value="1">Kem đánh răng</option>
+                    <option value="2">Dầu gội</option>
+                    <option value="3" selected>Sữa tắm</option>
+                    <option value="4">Bột giặt</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">Dự đoán số người tham gia</td>
+            <td><input name="numDuDoan" type="number" class="txt" id="numDuDoan" min="1" step="1" value="1"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input name="submit" type="submit" class="btn" id="submit" value="Đăng ký">
+                <input name="reset" type="reset" class="btn" id="reset" value="Làm lại" onClick="lamLai();">
+            </td>
+        </tr>
+    </table>
+</form> 
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết Quả Học Tập</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai01.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e91e63 0%, #f48fb1 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #f8bbd0;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: #c2185b;
+            padding: 15px;
+            border-radius: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        label {
+            color: #4a0e28;
+            font-weight: 600;
+            font-size: 18px;
+            min-width: 180px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ad1457;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #c2185b;
+            box-shadow: 0 0 0 3px rgba(194, 24, 91, 0.2);
+        }
+
+        .result-input {
+            background: #fff9c4 !important;
+            font-weight: 600;
+            color: #f57f17;
+        }
+
+        .grade-input {
+            background: #fff9c4 !important;
+            font-weight: 600;
+            color: #4caf50;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #8d6e63;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            background: #6d4c41;
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .info-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 5px solid #c2185b;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .info-section h3 {
+            color: #c2185b;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .formula-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #1976d2;
+        }
+
+        .formula-box p {
+            margin: 8px 0;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .formula-box strong {
+            color: #1976d2;
+        }
+
+        .criteria-box {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #f57c00;
+        }
+
+        .criteria-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+
+        .criteria-box ul {
+            margin-left: 20px;
+            color: #555;
+        }
+
+        .criteria-box li {
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+
+        .result-details {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .result-item {
+            padding: 10px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .result-value {
+            font-weight: 700;
+            font-size: 18px;
+            color: #c2185b;
+        }
+
+        .pass {
+            color: #4caf50 !important;
+        }
+
+        .fail {
+            color: #f44336 !important;
+        }
+
+        .grade-excellent {
+            color: #4caf50 !important;
+        }
+
+        .grade-good {
+            color: #2196f3 !important;
+        }
+
+        .grade-average {
+            color: #ff9800 !important;
+        }
+
+        .grade-weak {
+            color: #f44336 !important;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            label {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kết Quả Học Tập</h1>
+        
+        <form onsubmit="calculateResult(event)">
+            <div class="form-group">
+                <label for="hk1">Điểm HK1:</label>
+                <input type="number" id="hk1" step="0.1" min="0" max="10" placeholder="Nhập điểm HK1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hk2">Điểm HK2:</label>
+                <input type="number" id="hk2" step="0.1" min="0" max="10" placeholder="Nhập điểm HK2" required>
+            </div>
+
+            <div class="form-group">
+                <label for="avg">Điểm trung bình:</label>
+                <input type="text" id="avg" class="result-input" placeholder="Tự động tính" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="result">Kết quả:</label>
+                <input type="text" id="result" class="result-input" placeholder="Tự động xét" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="grade">Xếp loại học lực:</label>
+                <input type="text" id="grade" class="grade-input" placeholder="Tự động xếp loại" readonly>
+            </div>
+
+            <button type="submit">Xem kết quả</button>
+        </form>
+
+        <div id="detailsSection"></div>
+
+        <div class="info-section">
+            <h3>📚 Công Thức & Tiêu Chí</h3>
+            
+            <div class="formula-box">
+                <p><strong>Điểm trung bình (DTB):</strong></p>
+                <p style="text-align: center; font-size: 18px; color: #1976d2; font-weight: 600;">
+                    DTB = (HK1 + HK2 × 2) ÷ 3
+                </p>
+            </div>
+
+            <div class="criteria-box">
+                <h4>🎯 Tiêu chí Kết quả:</h4>
+                <ul>
+                    <li><strong>Được lên lớp:</strong> DTB ≥ 5</li>
+                    <li><strong>Ở lại lớp:</strong> DTB < 5</li>
+                </ul>
+            </div>
+
+            <div class="criteria-box">
+                <h4>🏆 Tiêu chí Xếp loại học lực:</h4>
+                <ul>
+                    <li><strong>Giỏi:</strong> DTB ≥ 8</li>
+                    <li><strong>Khá:</strong> 6.5 ≤ DTB < 8</li>
+                    <li><strong>Trung bình:</strong> 5 ≤ DTB < 6.5</li>
+                    <li><strong>Yếu:</strong> DTB < 5</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateResult(event) {
+            event.preventDefault();
+
+            // Lấy giá trị đầu vào
+            const hk1 = parseFloat(document.getElementById('hk1').value);
+            const hk2 = parseFloat(document.getElementById('hk2').value);
+
+            // Kiểm tra giá trị hợp lệ
+            if (hk1 < 0 || hk1 > 10 || hk2 < 0 || hk2 > 10) {
+                alert('Điểm phải nằm trong khoảng 0-10!');
+                return;
+            }
+
+            // Tính điểm trung bình: DTB = (HK1 + HK2*2) / 3
+            const dtb = (hk1 + hk2 * 2) / 3;
+
+            // Xét kết quả
+            let result = '';
+            let resultClass = '';
+            if (dtb >= 5) {
+                result = 'Được lên lớp';
+                resultClass = 'pass';
+            } else {
+                result = 'Ở lại lớp';
+                resultClass = 'fail';
+            }
+
+            // Xếp loại học lực
+            let grade = '';
+            let gradeClass = '';
+            if (dtb >= 8) {
+                grade = 'Giỏi';
+                gradeClass = 'grade-excellent';
+            } else if (dtb >= 6.5) {
+                grade = 'Khá';
+                gradeClass = 'grade-good';
+            } else if (dtb >= 5) {
+                grade = 'Trung bình';
+                gradeClass = 'grade-average';
+            } else {
+                grade = 'Yếu';
+                gradeClass = 'grade-weak';
+            }
+
+            // Hiển thị kết quả
+            document.getElementById('avg').value = dtb.toFixed(2);
+            document.getElementById('result').value = result;
+            document.getElementById('grade').value = grade;
+
+            // Hiển thị chi tiết
+            const detailsSection = document.getElementById('detailsSection');
+            detailsSection.innerHTML = `
+                <div class="info-section">
+                    <h3>📊 Chi Tiết Kết Quả</h3>
+                    
+                    <div class="result-details">
+                        <div class="result-item">
+                            <span class="result-label">Điểm HK1:</span>
+                            <span class="result-value">${hk1.toFixed(1)}</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span class="result-label">Điểm HK2:</span>
+                            <span class="result-value">${hk2.toFixed(1)}</span>
+                        </div>
+                        
+                        <div class="result-item" style="background: #e3f2fd;">
+                            <span class="result-label">Điểm trung bình:</span>
+                            <span class="result-value">${dtb.toFixed(2)}</span>
+                        </div>
+                        
+                        <div class="result-item" style="background: ${resultClass === 'pass' ? '#e8f5e9' : '#ffebee'};">
+                            <span class="result-label">Kết quả:</span>
+                            <span class="result-value ${resultClass}">${result}</span>
+                        </div>
+                        
+                        <div class="result-item" style="background: #fff9c4;">
+                            <span class="result-label">Xếp loại học lực:</span>
+                            <span class="result-value ${gradeClass}">${grade}</span>
+                        </div>
+                    </div>
+
+                    <div class="formula-box" style="margin-top: 20px;">
+                        <p><strong>📝 Cách tính:</strong></p>
+                        <p>1. DTB = (HK1 + HK2 × 2) ÷ 3</p>
+                        <p>2. DTB = (${hk1.toFixed(1)} + ${hk2.toFixed(1)} × 2) ÷ 3</p>
+                        <p>3. DTB = (${hk1.toFixed(1)} + ${(hk2 * 2).toFixed(1)}) ÷ 3</p>
+                        <p>4. DTB = ${(hk1 + hk2 * 2).toFixed(2)} ÷ 3</p>
+                        <p style="text-align: center; font-size: 18px; color: #1976d2; font-weight: 600; margin-top: 10px;">
+                            DTB = ${dtb.toFixed(2)}
+                        </p>
+                    </div>
+
+                    <div class="criteria-box">
+                        <h4>💡 Nhận xét:</h4>
+                        <ul>
+                            ${dtb >= 8 ? '<li>✅ Học sinh đạt thành tích xuất sắc!</li>' : ''}
+                            ${dtb >= 6.5 && dtb < 8 ? '<li>✅ Học sinh đạt thành tích tốt!</li>' : ''}
+                            ${dtb >= 5 && dtb < 6.5 ? '<li>⚠️ Học sinh cần cố gắng thêm!</li>' : ''}
+                            ${dtb < 5 ? '<li>❌ Học sinh cần nỗ lực hơn nữa!</li>' : ''}
+                            <li>Điểm HK2 được tính hệ số 2 (quan trọng hơn HK1)</li>
+                            ${dtb >= 5 ? '<li>🎉 Chúc mừng! Được lên lớp!</li>' : '<li>😢 Rất tiếc! Cần học lại!</li>'}
+                        </ul>
+                    </div>
+                </div>
+            `;
+
+            // Scroll to details
+            detailsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>

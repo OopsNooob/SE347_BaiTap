@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xử Lý Chuỗi</title>
+    <link rel="icon" type="image/x-icon" href=".\images\Bai01.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: all 0.3s;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result {
+            margin-top: 30px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .original-string {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .original-string h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .string-display {
+            background: white;
+            color: #667eea;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: 600;
+            word-break: break-word;
+            font-family: 'Courier New', monospace;
+        }
+
+        .result-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-value {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            word-break: break-word;
+            font-family: 'Courier New', monospace;
+        }
+
+        .result-detail {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .result-detail p {
+            margin: 5px 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            color: #667eea;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .comparison {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .comparison-row {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            gap: 15px;
+        }
+
+        .comparison-label {
+            font-weight: 600;
+            color: #667eea;
+            min-width: 120px;
+        }
+
+        .comparison-value {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+        }
+
+        .copy-button {
+            padding: 8px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .copy-button:hover {
+            background: #5568d3;
+        }
+
+        .copy-button.copied {
+            background: #4caf50;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+
+        .char-analysis {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 15px;
+        }
+
+        .char-box {
+            background: #667eea;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: 600;
+            min-width: 40px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .char-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .char-box.space {
+            background: #ff9800;
+        }
+
+        .char-box.number {
+            background: #4caf50;
+        }
+
+        .char-box.special {
+            background: #e91e63;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .result-value {
+                font-size: 18px;
+            }
+
+            .comparison-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .comparison-label {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Xử Lý Chuỗi</h1>
+        <p class="subtitle">Đảo ngược và chuyển đổi chuỗi</p>
+        
+        <form onsubmit="processString(event)">
+            <div class="form-group">
+                <label for="inputString">Nhập chuỗi:</label>
+                <textarea id="inputString" placeholder="Ví dụ: Hello World!" required></textarea>
+            </div>
+            
+            <button type="submit">Xử Lý Chuỗi</button>
+        </form>
+
+        <div id="result"></div>
+
+        <div class="info-box">
+            <h4>📚 Các Chức Năng:</h4>
+            <p><strong>a. Đảo ngược chuỗi:</strong> Đảo ngược thứ tự các ký tự trong chuỗi</p>
+            <p><strong>b. Chuyển in hoa:</strong> Chuyển tất cả ký tự thành chữ in hoa (UPPERCASE)</p>
+        </div>
+    </div>
+
+    <script>
+        // a. Hàm đảo ngược chuỗi
+        function reverseString(str) {
+            return str.split('').reverse().join('');
+        }
+
+        // b. Hàm chuyển in hoa
+        function toUpperCaseString(str) {
+            return str.toUpperCase();
+        }
+
+        // Hàm chuyển in thường
+        function toLowerCaseString(str) {
+            return str.toLowerCase();
+        }
+
+        // Hàm đếm các loại ký tự
+        function analyzeString(str) {
+            let letters = 0;
+            let uppercase = 0;
+            let lowercase = 0;
+            let numbers = 0;
+            let spaces = 0;
+            let special = 0;
+
+            for (let char of str) {
+                if (char === ' ') {
+                    spaces++;
+                } else if (char >= '0' && char <= '9') {
+                    numbers++;
+                } else if ((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z')) {
+                    letters++;
+                    if (char === char.toUpperCase()) {
+                        uppercase++;
+                    } else {
+                        lowercase++;
+                    }
+                } else {
+                    special++;
+                }
+            }
+
+            return { letters, uppercase, lowercase, numbers, spaces, special };
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(text, buttonId) {
+            navigator.clipboard.writeText(text).then(() => {
+                const button = document.getElementById(buttonId);
+                const originalText = button.textContent;
+                button.textContent = '✓ Đã sao chép';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Hiển thị từng ký tự
+        function displayCharacters(str) {
+            let html = '<div class="char-analysis">';
+            for (let char of str) {
+                let className = 'char-box';
+                let displayChar = char;
+                
+                if (char === ' ') {
+                    className += ' space';
+                    displayChar = '␣';
+                } else if (char >= '0' && char <= '9') {
+                    className += ' number';
+                } else if (!((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z'))) {
+                    className += ' special';
+                }
+                
+                html += `<div class="${className}">${displayChar}</div>`;
+            }
+            html += '</div>';
+            return html;
+        }
+
+        // Xử lý form
+        function processString(event) {
+            event.preventDefault();
+            
+            const inputStr = document.getElementById('inputString').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (!inputStr || inputStr.trim() === '') {
+                resultDiv.innerHTML = `
+                    <div class="result-box" style="background: #ffe6e6; border-left-color: #e74c3c;">
+                        <h4 style="color: #e74c3c;">❌ Lỗi</h4>
+                        <p style="color: #c0392b;">Vui lòng nhập chuỗi!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Xử lý chuỗi
+            const reversedStr = reverseString(inputStr);
+            const upperStr = toUpperCaseString(inputStr);
+            const lowerStr = toLowerCaseString(inputStr);
+            const analysis = analyzeString(inputStr);
+
+            let html = '<div class="result">';
+
+            // Hiển thị chuỗi gốc
+            html += `
+                <div class="original-string">
+                    <h3>📄 Chuỗi Gốc</h3>
+                    <div class="string-display">${inputStr}</div>
+                    <div style="margin-top: 15px; font-size: 14px;">
+                        Độ dài: ${inputStr.length} ký tự
+                    </div>
+                </div>
+            `;
+
+            // Phân tích ký tự
+            html += `
+                <div class="result-box" style="background: #f3e5f5; border-left-color: #9c27b0;">
+                    <h4 style="color: #9c27b0;">🔍 Phân Tích Ký Tự</h4>
+                    ${displayCharacters(inputStr)}
+                    <div style="margin-top: 15px; font-size: 13px; color: #666;">
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px;">
+                            <span><span style="display: inline-block; width: 15px; height: 15px; background: #667eea; border-radius: 3px; margin-right: 5px;"></span>Chữ cái</span>
+                            <span><span style="display: inline-block; width: 15px; height: 15px; background: #4caf50; border-radius: 3px; margin-right: 5px;"></span>Số</span>
+                            <span><span style="display: inline-block; width: 15px; height: 15px; background: #ff9800; border-radius: 3px; margin-right: 5px;"></span>Khoảng trắng</span>
+                            <span><span style="display: inline-block; width: 15px; height: 15px; background: #e91e63; border-radius: 3px; margin-right: 5px;"></span>Ký tự đặc biệt</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Thống kê
+            html += `
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-label">Tổng ký tự</div>
+                        <div class="stat-value">${inputStr.length}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Chữ cái</div>
+                        <div class="stat-value">${analysis.letters}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Chữ hoa</div>
+                        <div class="stat-value">${analysis.uppercase}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Chữ thường</div>
+                        <div class="stat-value">${analysis.lowercase}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Số</div>
+                        <div class="stat-value">${analysis.numbers}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Khoảng trắng</div>
+                        <div class="stat-value">${analysis.spaces}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Ký tự đặc biệt</div>
+                        <div class="stat-value">${analysis.special}</div>
+                    </div>
+                </div>
+            `;
+
+            // a. Chuỗi đảo ngược
+            html += `
+                <div class="result-box">
+                    <h4>a. 🔄 Chuỗi Đảo Ngược</h4>
+                    <div class="result-value">${reversedStr}</div>
+                    <div class="result-detail">
+                        <p><strong>Phương pháp:</strong> Đảo ngược thứ tự các ký tự</p>
+                        <p><strong>Công thức:</strong> string.split('').reverse().join('')</p>
+                        <div class="comparison">
+                            <div class="comparison-row">
+                                <span class="comparison-label">Gốc:</span>
+                                <span class="comparison-value">${inputStr}</span>
+                                <button class="copy-button" id="copyOriginal" onclick="copyToClipboard('${inputStr.replace(/'/g, "\\'")}', 'copyOriginal')">Copy</button>
+                            </div>
+                            <div class="comparison-row">
+                                <span class="comparison-label">Đảo ngược:</span>
+                                <span class="comparison-value">${reversedStr}</span>
+                                <button class="copy-button" id="copyReversed" onclick="copyToClipboard('${reversedStr.replace(/'/g, "\\'")}', 'copyReversed')">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // b. Chuỗi in hoa
+            html += `
+                <div class="result-box">
+                    <h4>b. 🔤 Chuỗi In Hoa (UPPERCASE)</h4>
+                    <div class="result-value">${upperStr}</div>
+                    <div class="result-detail">
+                        <p><strong>Phương pháp:</strong> Chuyển tất cả ký tự thành chữ in hoa</p>
+                        <p><strong>Công thức:</strong> string.toUpperCase()</p>
+                        <div class="comparison">
+                            <div class="comparison-row">
+                                <span class="comparison-label">Gốc:</span>
+                                <span class="comparison-value">${inputStr}</span>
+                                <button class="copy-button" id="copyOriginal2" onclick="copyToClipboard('${inputStr.replace(/'/g, "\\'")}', 'copyOriginal2')">Copy</button>
+                            </div>
+                            <div class="comparison-row">
+                                <span class="comparison-label">IN HOA:</span>
+                                <span class="comparison-value">${upperStr}</span>
+                                <button class="copy-button" id="copyUpper" onclick="copyToClipboard('${upperStr.replace(/'/g, "\\'")}', 'copyUpper')">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Bonus: Chuỗi in thường
+            html += `
+                <div class="result-box" style="background: #e8f5e9; border-left-color: #4caf50;">
+                    <h4 style="color: #2e7d32;">➕ Bonus: Chuỗi In Thường (lowercase)</h4>
+                    <div class="result-value">${lowerStr}</div>
+                    <div class="result-detail">
+                        <p><strong>Phương pháp:</strong> Chuyển tất cả ký tự thành chữ in thường</p>
+                        <p><strong>Công thức:</strong> string.toLowerCase()</p>
+                        <div class="comparison">
+                            <div class="comparison-row">
+                                <span class="comparison-label">in thường:</span>
+                                <span class="comparison-value">${lowerStr}</span>
+                                <button class="copy-button" id="copyLower" onclick="copyToClipboard('${lowerStr.replace(/'/g, "\\'")}', 'copyLower')">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            html += '</div>';
+            resultDiv.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
